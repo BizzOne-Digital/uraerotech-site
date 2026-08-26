@@ -50,7 +50,7 @@ export default function HeroSection({ data }: HeroProps) {
 
       {/* HUD overlay */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-60"
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-60 hidden sm:block"
         viewBox="0 0 1440 900"
         preserveAspectRatio="xMidYMid slice"
         aria-hidden
@@ -72,7 +72,7 @@ export default function HeroSection({ data }: HeroProps) {
       </svg>
 
       {/* Content */}
-      <div className="relative z-10 w-full px-5 sm:px-8 lg:px-10 pt-32 pb-0">
+      <div className="relative z-10 w-full max-w-full px-4 sm:px-8 lg:px-10 pt-28 sm:pt-32 pb-0">
         <div className="max-w-[1440px] mx-auto">
           {/* Section tag */}
           <motion.div
@@ -81,7 +81,7 @@ export default function HeroSection({ data }: HeroProps) {
             transition={{ delay: 0.2 }}
             className="flex items-center gap-4 mb-8"
           >
-            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#58a6ff] whitespace-nowrap">
+            <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#58a6ff]">
               {defaultHero.section}
             </span>
             <span className="h-px flex-1 max-w-[120px] bg-[#58a6ff]/50" />
@@ -92,7 +92,7 @@ export default function HeroSection({ data }: HeroProps) {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#58a6ff] mb-5"
+              className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.16em] sm:tracking-[0.28em] text-[#58a6ff] mb-5 break-words"
             >
               {hero.eyebrow}
             </motion.p>
@@ -101,7 +101,7 @@ export default function HeroSection({ data }: HeroProps) {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45, duration: 0.7 }}
-              className="font-heading font-bold text-[clamp(2.8rem,6.5vw,5rem)] leading-[1.02] tracking-[-0.02em] text-white mb-7"
+              className="font-heading font-bold text-[clamp(2rem,8vw,5rem)] leading-[1.05] tracking-[-0.02em] text-white mb-6 sm:mb-7 break-words"
             >
               {hero.headline}
             </motion.h1>
@@ -119,13 +119,13 @@ export default function HeroSection({ data }: HeroProps) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.75 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4"
             >
-              <Link to="/quote" className="btn-hero-gold">
+              <Link to="/quote" className="btn-hero-gold w-full sm:w-auto">
                 {hero.ctaPrimary}
                 <IconArrowRight size={16} />
               </Link>
-              <Link to="/products" className="btn-hero-ghost">
+              <Link to="/products" className="btn-hero-ghost w-full sm:w-auto">
                 {hero.ctaSecondary}
                 <IconArrowRight size={16} />
               </Link>
@@ -141,7 +141,7 @@ export default function HeroSection({ data }: HeroProps) {
         transition={{ delay: 0.9 }}
         className="relative z-10 mt-16 md:mt-20 border-t border-white/[0.08] bg-[#0a0d12]/60 backdrop-blur-sm"
       >
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-10">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-10">
           <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/[0.08]">
             {stats.map((s) => (
               <div key={s.label} className="flex items-center gap-4 py-6 md:py-7 sm:px-8 first:sm:pl-0">

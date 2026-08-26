@@ -17,6 +17,7 @@ export default function MainLayout() {
       <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
+          className="w-full max-w-full overflow-x-clip min-w-0"
           initial={reduced ? {} : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={reduced ? {} : { opacity: 0 }}

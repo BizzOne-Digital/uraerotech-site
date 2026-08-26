@@ -40,7 +40,7 @@ export default function AboutPage() {
                 alt="Aircraft engineers inspecting fuselage structure in hangar"
                 className="w-full aspect-[4/3] object-cover"
               />
-              <div className="absolute -bottom-4 -left-4 data-plate p-4">
+              <div className="absolute -bottom-4 left-0 sm:-left-4 data-plate p-4">
                 <p className="font-heading text-3xl text-technical">20+</p>
                 <p className="font-mono text-[10px] text-steel uppercase">Years Experience</p>
               </div>

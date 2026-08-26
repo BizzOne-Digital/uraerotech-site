@@ -22,7 +22,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#0a0d12] overflow-hidden">
+    <footer className="relative bg-[#0a0d12] overflow-x-clip">
       {/* subtle grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -48,12 +48,12 @@ export default function Footer() {
                 Expert structural repair &amp; certified parts — worldwide
               </h3>
             </div>
-            <div className="flex flex-wrap gap-4 shrink-0">
-              <Link to="/quote" className="btn-hero-gold">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 shrink-0 w-full sm:w-auto">
+              <Link to="/quote" className="btn-hero-gold w-full sm:w-auto justify-center">
                 Request a Quote
                 <IconArrowRight size={14} />
               </Link>
-              <Link to="/contact" className="btn-hero-ghost">
+              <Link to="/contact" className="btn-hero-ghost w-full sm:w-auto justify-center">
                 Contact Us
                 <IconArrowRight size={14} />
               </Link>

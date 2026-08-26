@@ -48,9 +48,10 @@ export default function Header() {
               : 'bg-[#0a0d12]/90 backdrop-blur-md py-4'
         }`}
       >
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-10 flex items-center justify-between gap-6">
-          {/* Logo */}
-          <Logo height="md" />
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-10 flex items-center justify-between gap-3 sm:gap-6 min-w-0">
+          <div className="min-w-0 shrink">
+            <Logo height="md" />
+          </div>
 
           {/* Desktop Nav */}
           <nav className="hidden xl:flex items-center gap-7 lg:gap-8">
@@ -90,7 +91,7 @@ export default function Header() {
             </Link>
           </div>
 
-          <button className="lg:hidden text-white p-2" onClick={() => setOpen(!open)} aria-label="Menu">
+          <button className="lg:hidden text-white p-2 shrink-0" onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <IconClose size={22} /> : <IconMenu size={22} />}
           </button>
         </div>

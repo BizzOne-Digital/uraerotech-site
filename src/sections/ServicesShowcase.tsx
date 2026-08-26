@@ -76,10 +76,13 @@ export default function ServicesShowcase({ services }: { services?: Service[] })
     });
 
     const refresh = () => ScrollTrigger.refresh();
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener('resize', onResize);
     window.addEventListener('load', refresh);
     const t = window.setTimeout(refresh, 400);
 
     return () => {
+      window.removeEventListener('resize', onResize);
       window.removeEventListener('load', refresh);
       window.clearTimeout(t);
       mm.revert();
@@ -87,7 +90,7 @@ export default function ServicesShowcase({ services }: { services?: Service[] })
   }, [reduced, items.length]);
 
   return (
-    <section className="relative bg-[#0a0d12] overflow-hidden">
+    <section className="relative bg-[#0a0d12] overflow-x-clip">
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
@@ -98,7 +101,7 @@ export default function ServicesShowcase({ services }: { services?: Service[] })
       />
 
       {/* Header scrolls normally — not pinned */}
-      <div className="relative z-10 px-5 sm:px-8 lg:px-10 pt-20 md:pt-24 pb-8 md:pb-10">
+      <div className="relative z-10 px-4 sm:px-8 lg:px-10 pt-20 md:pt-24 pb-8 md:pb-10">
         <div className="max-w-[1440px] mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <SectionHeader
@@ -131,7 +134,7 @@ export default function ServicesShowcase({ services }: { services?: Service[] })
       </div>
 
       {/* Mobile stack */}
-      <div className="md:hidden relative z-10 px-5 sm:px-8 pb-12 space-y-5">
+      <div className="md:hidden relative z-10 px-4 sm:px-8 pb-12 space-y-5 max-w-full">
         {items.map((service, i) => (
           <ServiceCard key={service.slug} service={service} index={i} />
         ))}
@@ -153,7 +156,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
   return (
     <Link
       to={`/services/${service.slug}`}
-      className="group relative shrink-0 w-[72vw] sm:w-[320px] lg:w-[380px] border border-white/[0.08] bg-[#111820] overflow-hidden transition-colors duration-500 hover:border-[#58a6ff]/40"
+      className="group relative shrink-0 w-full md:w-[320px] lg:w-[380px] max-w-full border border-white/[0.08] bg-[#111820] overflow-hidden transition-colors duration-500 hover:border-[#58a6ff]/40"
     >
       <div className="aspect-[3/4] relative overflow-hidden">
         <img
