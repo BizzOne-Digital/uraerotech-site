@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SEO from '../components/ui/SEO';
 import Button from '../components/ui/Button';
-import { productApi } from '../services';
+import { getProductBySlug, getRelatedProducts } from '../services/content';
 import type { Product } from '../types';
 
 export default function ProductDetailPage() {
@@ -14,10 +14,8 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     if (!slug) return;
-    productApi.getBySlug(slug).then((r) => {
-      setProduct(r.data.data);
-    }).finally(() => setLoading(false));
-    productApi.getRelated(slug).then((r) => setRelated(r.data.data)).catch(() => {});
+    getProductBySlug(slug).then(setProduct).finally(() => setLoading(false));
+    getRelatedProducts(slug).then(setRelated);
   }, [slug]);
 
   if (loading) {

@@ -10,7 +10,8 @@ import ProcessSection from '../sections/ProcessSection';
 import WhyChooseUs from '../sections/WhyChooseUs';
 import Certifications from '../sections/Certifications';
 import CTASection from '../sections/CTASection';
-import { settingsApi, serviceApi, industryApi, productApi } from '../services';
+import { getFeaturedProducts, getIndustries, getServices } from '../services/content';
+import { settingsApi } from '../services';
 import type { SiteSettings, Service, Industry, Product } from '../types';
 
 export default function HomePage() {
@@ -22,9 +23,9 @@ export default function HomePage() {
   useEffect(() => {
     Promise.all([
       settingsApi.get().then((r) => setSettings(r.data.data)).catch(() => {}),
-      serviceApi.getAll().then((r) => setServices(r.data.data)).catch(() => {}),
-      industryApi.getAll().then((r) => setIndustries(r.data.data)).catch(() => {}),
-      productApi.getFeatured().then((r) => setProducts(r.data.data)).catch(() => {}),
+      getServices().then(setServices),
+      getIndustries().then(setIndustries),
+      getFeaturedProducts().then(setProducts),
     ]);
   }, []);
 

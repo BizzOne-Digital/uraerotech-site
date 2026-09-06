@@ -1,7 +1,8 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import cors from 'cors';import helmet from 'helmet';
+import cors from 'cors';
+import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import mongoSanitize from 'express-mongo-sanitize';
@@ -18,10 +19,17 @@ import uploadRoutes from './routes/uploadRoutes.js';
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(
   cors({
-    origin: config.clientUrl,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (origin === config.clientUrl) return callback(null, true);
+      if (process.env.VERCEL && origin.endsWith('.vercel.app')) return callback(null, true);
+      callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
   })
 );
@@ -44,7 +52,7 @@ app.use('/api/inquiries', inquiryRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/upload', uploadRoutes);
 
-if (config.nodeEnv === 'production') {
+if (config.nodeEnv === 'production' && !process.env.VERCEL) {
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const clientDist = path.resolve(__dirname, '../../../dist');
 

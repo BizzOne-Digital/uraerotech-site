@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import SEO from '../components/ui/SEO';
 import Button from '../components/ui/Button';
 import { IconCheck } from '../components/icons';
-import { serviceApi } from '../services';
+import { getServiceBySlug, getServices } from '../services/content';
 import type { Service } from '../types';
 
 export default function ServiceDetailPage() {
@@ -15,8 +15,8 @@ export default function ServiceDetailPage() {
   useEffect(() => {
     if (!slug) return;
     Promise.all([
-      serviceApi.getBySlug(slug).then((r) => setService(r.data.data)),
-      serviceApi.getAll().then((r) => setAllServices(r.data.data)),
+      getServiceBySlug(slug).then(setService),
+      getServices().then(setAllServices),
     ]).finally(() => setLoading(false));
   }, [slug]);
 

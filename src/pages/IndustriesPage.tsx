@@ -3,14 +3,14 @@ import SEO from '../components/ui/SEO';
 import SectionHeader from '../components/ui/SectionHeader';
 import { IconCheck } from '../components/icons';
 import { getIndustryImage } from '../assets/images';
-import { industryApi } from '../services';
+import { getIndustries } from '../services/content';
 import type { Industry } from '../types';
 
 export default function IndustriesPage() {
   const [industries, setIndustries] = useState<Industry[]>([]);
 
   useEffect(() => {
-    industryApi.getAll().then((r) => setIndustries(r.data.data)).catch(() => {});
+    getIndustries().then(setIndustries);
   }, []);
 
   return (

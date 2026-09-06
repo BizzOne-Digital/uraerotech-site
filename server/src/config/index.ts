@@ -3,7 +3,16 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+
+if (!process.env.VERCEL) {
+  dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+}
+
+function resolveClientUrl(): string {
+  if (process.env.CLIENT_URL) return process.env.CLIENT_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'http://localhost:5173';
+}
 
 export const config = {
   port: parseInt(process.env.PORT || '5000', 10),
@@ -16,11 +25,11 @@ export const config = {
     refreshExpires: process.env.JWT_REFRESH_EXPIRES || '7d',
   },
   cookie: {
-    domain: process.env.COOKIE_DOMAIN || 'localhost',
+    domain: process.env.COOKIE_DOMAIN || undefined,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
   },
-  clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
+  clientUrl: resolveClientUrl(),
   cloudinary: {
     cloudName: process.env.CLOUDINARY_CLOUD_NAME || '',
     apiKey: process.env.CLOUDINARY_API_KEY || '',

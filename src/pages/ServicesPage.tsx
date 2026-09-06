@@ -4,7 +4,7 @@ import SEO from '../components/ui/SEO';
 import SectionHeader from '../components/ui/SectionHeader';
 import Button from '../components/ui/Button';
 import { getServiceImage } from '../assets/images';
-import { serviceApi } from '../services';
+import { getServices } from '../services/content';
 import type { Service } from '../types';
 
 export default function ServicesPage() {
@@ -12,7 +12,7 @@ export default function ServicesPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    serviceApi.getAll().then((r) => setServices(r.data.data)).finally(() => setLoading(false));
+    getServices().then(setServices).finally(() => setLoading(false));
   }, []);
 
   return (

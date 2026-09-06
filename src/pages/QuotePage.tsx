@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import SEO from '../components/ui/SEO';
 import Button from '../components/ui/Button';
-import { inquiryApi, serviceApi } from '../services';
+import { inquiryApi } from '../services';
+import { getServices } from '../services/content';
 import type { Service } from '../types';
 
 interface QuoteForm {
@@ -43,7 +44,7 @@ export default function QuotePage() {
   });
 
   useEffect(() => {
-    serviceApi.getAll().then((r) => setServices(r.data.data)).catch(() => {});
+    getServices().then(setServices);
     const service = searchParams.get('service');
     if (service) setValue('service', service);
   }, [searchParams, setValue]);

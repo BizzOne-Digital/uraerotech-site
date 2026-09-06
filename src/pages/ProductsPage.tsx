@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import SEO from '../components/ui/SEO';
 import Button from '../components/ui/Button';
-import { productApi, settingsApi } from '../services';
+import { getCategories, getProducts } from '../services/content';
 import type { Product, Category } from '../types';
 
 export default function ProductsPage() {
@@ -27,11 +27,11 @@ export default function ProductsPage() {
     if (saleOrRental) params.saleOrRental = saleOrRental;
 
     Promise.all([
-      productApi.getAll(params).then((r) => {
-        setProducts(r.data.data);
-        if (r.data.pagination) setPagination(r.data.pagination);
+      getProducts(params).then(({ data, pagination }) => {
+        setProducts(data);
+        setPagination(pagination);
       }),
-      settingsApi.getCategories().then((r) => setCategories(r.data.data)),
+      getCategories().then(setCategories),
     ]).finally(() => setLoading(false));
   }, [searchParams]);
 
@@ -138,7 +138,7 @@ export default function ProductsPage() {
                     <Link key={product._id} to={`/products/${product.slug}`} className="group card-technical !p-0 overflow-hidden hover:border-technical/30">
                       <div className="aspect-square overflow-hidden relative">
                         <img
-                          src={product.images[0]?.url || 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&q=80'}
+                          src={product.images[0]?.url || '/images/services/aircraft-parts-supply.jpg'}
                           alt={product.images[0]?.alt || product.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
