@@ -36,7 +36,7 @@ export default function AboutPage() {
             </div>
             <div className="relative">
               <img
-                src="/images/hero-hangar.png"
+                src="/images/about-engineer.jpg"
                 alt="Aircraft engineers inspecting fuselage structure in hangar"
                 className="w-full aspect-[4/3] object-cover"
               />

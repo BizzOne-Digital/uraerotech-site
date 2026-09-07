@@ -209,7 +209,7 @@ const seed = async () => {
       slug: 'aerospace-manufacturing',
       description: 'Supporting aerospace manufacturers with structural components, tooling, and precision fabrication services.',
       capabilities: ['Component fabrication', 'Tooling supply', 'Quality documentation', 'Prototype support', 'Production assistance'],
-      image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200&q=80',
+      image: '/images/industries/aerospace-manufacturing.jpg',
       order: 6,
     },
   ];
@@ -228,7 +228,7 @@ const seed = async () => {
         headline: 'Structure Repair & Sales',
         subheadline:
           '20+ Years of Excellence in Aircraft Structural Repairs and Modifications. Supplying certified aircraft parts, aviation tools, and industry-leading services — all in one place.',
-        image: 'https://images.unsplash.com/photo-1569629743758-f27aec8d45c2?w=1920&q=85&auto=format&fit=crop',
+        image: '/images/hero-hangar.jpg',
         ctaPrimary: 'Get a Quote',
         ctaSecondary: 'Browse Inventory',
       },

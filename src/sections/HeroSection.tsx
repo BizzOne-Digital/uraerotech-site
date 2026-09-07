@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { IconShield, IconGear, IconBox, IconArrowRight } from '../components/icons';
 
-const HERO_BG = '/images/hero-hangar.png';
+const HERO_BG = '/images/hero-hangar.jpg';
 
 const defaultHero = {
   section: '01 / Structural Excellence',

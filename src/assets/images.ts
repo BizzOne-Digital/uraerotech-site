@@ -1,18 +1,12 @@
-/** Curated Unsplash aviation maintenance & structural repair imagery */
-const img = (id: string, w = 1920) =>
-  `https://images.unsplash.com/${id}?w=${w}&q=85&auto=format&fit=crop`;
-
 export const images = {
-  hero: '/images/hero-hangar.png',
-  heroAlt: img('photo-1581092918056-0c4c3acd3789', 1200),
-
-  about: '/images/hero-hangar.png',
-  aboutEngineer: img('photo-1581091226825-a6a2a5aee158', 1200),
-  hangar: img('photo-1559629956-d6e1d0896d0f', 1600),
-  fuselage: img('photo-1581092160562-40aa08e78837', 1200),
-  sheetMetal: img('photo-1581092918056-0c4c3acd3789', 1200),
-  tools: img('photo-1581094794329-cd2c90e2b3a0', 1200),
-  inspection: img('photo-1581091226825-a6a2a5aee158', 1200),
+  hero: '/images/hero-hangar.jpg',
+  about: '/images/about-engineer.jpg',
+  aboutEngineer: '/images/about-engineer.jpg',
+  hangar: '/images/hero-hangar.jpg',
+  fuselage: '/images/services/aircraft-structural-repair.jpg',
+  sheetMetal: '/images/services/aircraft-structural-repair.jpg',
+  tools: '/images/services/aviation-tools-sales.jpg',
+  inspection: '/images/process/01-assessment.jpg',
 
   services: {
     'aircraft-structural-repair': '/images/services/aircraft-structural-repair.jpg',
@@ -29,23 +23,22 @@ export const images = {
     'cargo-freight': '/images/industries/cargo-freight.jpg',
     'military-defense': '/images/industries/military-defense.jpg',
     'helicopter-services': '/images/industries/helicopter-services.jpg',
-    'aerospace-manufacturing': img('photo-1581092160562-40aa08e78837', 900),
+    'aerospace-manufacturing': '/images/industries/aerospace-manufacturing.jpg',
   } as Record<string, string>,
 
   process: [
-    img('photo-1581092918056-0c4c3acd3789', 600),
-    img('photo-1581091226825-a6a2a5aee158', 600),
-    img('photo-1569629743758-f27aec8d45c2', 600),
-    img('photo-1581094794329-cd2c90e2b3a0', 600),
+    '/images/process/01-assessment.jpg',
+    '/images/process/02-engineering.jpg',
+    '/images/process/03-repair.jpg',
+    '/images/process/04-inspection.jpg',
   ],
 
-  whyChoose: '/images/hero-hangar.png',
-  cta: '/images/hero-hangar.png',
-  products: img('photo-1581092160562-40aa08e78837', 1200),
-  certification: img('photo-1581091226825-a6a2a5aee158', 1000),
+  whyChoose: '/images/why-choose-team.jpg',
+  cta: '/images/cta-hangar.jpg',
+  products: '/images/products-feature.jpg',
+  certification: '/images/certification.jpg',
 
-  /** Fallback if any image fails to load */
-  fallback: '/images/hero-hangar.png',
+  fallback: '/images/hero-hangar.jpg',
 };
 
 export function getServiceImage(slug: string, index = 0): string {
