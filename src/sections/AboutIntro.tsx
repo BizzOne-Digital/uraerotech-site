@@ -1,4 +1,5 @@
 import SectionHeader from '../components/ui/SectionHeader';
+import ScrollReveal from '../components/ui/ScrollReveal';
 import Button from '../components/ui/Button';
 import { images } from '../assets/images';
 
@@ -19,14 +20,14 @@ export default function AboutIntro({
       <div className="section-pad">
         <div className="site-container">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="order-2 lg:order-1">
+            <ScrollReveal className="order-2 lg:order-1">
               <img
                 src={images.about}
                 alt="Aviation engineer inspecting aircraft structure"
-                className="w-full aspect-[4/5] object-cover"
+                className="w-full aspect-[4/5] object-cover transition-transform duration-700 hover:scale-[1.02]"
               />
-            </div>
-            <div className="order-1 lg:order-2">
+            </ScrollReveal>
+            <ScrollReveal className="order-1 lg:order-2" delay={0.1}>
               <SectionHeader
                 label="About"
                 title="Excellence in aircraft structural repair"
@@ -45,7 +46,7 @@ export default function AboutIntro({
               <div className="mt-10">
                 <Button to="/about" variant="accent">Learn More</Button>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

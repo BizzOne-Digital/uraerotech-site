@@ -148,7 +148,7 @@ export default function ProductsPage() {
                       </div>
                       <div className="p-4">
                         <p className="font-mono text-[10px] text-steel">{product.sku}</p>
-                        <h3 className="font-heading text-sm mt-1 group-hover:text-technical transition-colors line-clamp-2">{product.name}</h3>
+                        <h3 className="font-heading text-sm mt-1 text-white group-hover:text-technical transition-colors line-clamp-2">{product.name}</h3>
                         <div className="flex justify-between items-center mt-2">
                           <span className="text-xs text-steel capitalize">{product.condition.replace('-', ' ')}</span>
                           <span className={`text-xs font-mono ${product.availability === 'in-stock' ? 'text-technical' : 'text-steel'}`}>

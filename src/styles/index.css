@@ -125,6 +125,33 @@
   .technical-label { @apply eyebrow text-steel; }
   .technical-label-accent { @apply eyebrow; }
   .data-plate { @apply bg-surface border border-white/[0.08] p-4; }
+
+  .card-technical {
+    @apply bg-surface border border-white/[0.08] overflow-hidden transition-all duration-500;
+  }
+
+  .card-technical:hover {
+    @apply border-technical/40 shadow-[0_0_40px_-12px_rgba(88,166,255,0.35)] -translate-y-1;
+  }
+
+  .service-card {
+    @apply relative overflow-hidden bg-surface border border-white/[0.08] transition-all duration-500;
+  }
+
+  .service-card:hover {
+    @apply border-technical/45 shadow-[0_0_48px_-10px_rgba(88,166,255,0.4)];
+  }
+
+  .accent-glow {
+    box-shadow: 0 0 60px -15px rgba(88, 166, 255, 0.35);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(88, 166, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(88, 166, 255, 0.06) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
   .body-lg { @apply text-base md:text-lg text-steel leading-relaxed; }
 }
 

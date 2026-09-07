@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import SectionHeader from '../components/ui/SectionHeader';
+import { staggerContainer, staggerItem } from '../components/ui/ScrollReveal';
 import { getIndustryImage } from '../assets/images';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 import type { Industry } from '../types';
 
 const defaults: Pick<Industry, 'title' | 'slug' | 'description'>[] = [  { title: 'Commercial Aviation', slug: 'commercial-aviation', description: 'Fleet structural repairs and AOG response for airlines and MRO facilities.' },
@@ -14,7 +17,9 @@ function industryImage(ind: Industry | (typeof defaults)[number], index: number)
   return getIndustryImage(ind.slug, index);
 }
 
-export default function IndustriesSection({ industries }: { industries?: Industry[] }) {  const items = industries?.length ? industries.slice(0, 4) : defaults;
+export default function IndustriesSection({ industries }: { industries?: Industry[] }) {
+  const items = industries?.length ? industries.slice(0, 4) : defaults;
+  const reduced = useReducedMotion();
 
   return (
     <section className="section-light">
@@ -27,35 +32,42 @@ export default function IndustriesSection({ industries }: { industries?: Industr
             light
           />
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <motion.div
+            className="grid md:grid-cols-2 gap-4"
+            variants={reduced ? undefined : staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-40px' }}
+          >
             {items.map((ind, i) => (
-              <Link
-                key={ind.slug}
-                to={`/industries#${ind.slug}`}
-                className={`group relative overflow-hidden ${i === 0 ? 'md:row-span-2' : ''}`}
-              >
-                <div className={`relative ${i === 0 ? 'aspect-[3/4] md:aspect-auto md:h-full min-h-[320px]' : 'aspect-[16/10]'}`}>
-                  <img
-                    src={industryImage(ind, i)}
-                    alt={ind.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      if (!target.dataset.fallback) {
-                        target.dataset.fallback = '1';
-                        target.src = getIndustryImage(ind.slug, i);
-                      }
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/30 to-transparent" />
-                  <div className="absolute bottom-0 p-6 md:p-8">
-                    <h3 className="font-heading text-xl md:text-2xl text-white mb-2">{ind.title}</h3>
-                    <p className="text-sm text-steel max-w-sm">{ind.description}</p>
+              <motion.div key={ind.slug} variants={reduced ? undefined : staggerItem}>
+                <Link
+                  to={`/industries#${ind.slug}`}
+                  className={`group relative overflow-hidden block ${i === 0 ? 'md:row-span-2' : ''}`}
+                >
+                  <div className={`relative ${i === 0 ? 'aspect-[3/4] md:aspect-auto md:h-full min-h-[320px]' : 'aspect-[16/10]'}`}>
+                    <img
+                      src={industryImage(ind, i)}
+                      alt={ind.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (!target.dataset.fallback) {
+                          target.dataset.fallback = '1';
+                          target.src = getIndustryImage(ind.slug, i);
+                        }
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-graphite/95 via-graphite/35 to-transparent" />
+                    <div className="absolute bottom-0 p-6 md:p-8">
+                      <h3 className="font-heading text-xl md:text-2xl text-white mb-2 group-hover:text-technical transition-colors">{ind.title}</h3>
+                      <p className="text-sm text-white/70 max-w-sm">{ind.description}</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
