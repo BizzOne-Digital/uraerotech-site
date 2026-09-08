@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './hooks/useAuth';
@@ -46,16 +46,15 @@ function AppRoutes() {
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
+  const handleLoaded = useCallback(() => setLoaded(true), []);
 
   return (
     <HelmetProvider>
       <AuthProvider>
-        {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
-        {loaded && (
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        )}
+        <BrowserRouter>
+          {!loaded && <Preloader onComplete={handleLoaded} />}
+          {loaded && <AppRoutes />}
+        </BrowserRouter>
       </AuthProvider>
     </HelmetProvider>
   );
