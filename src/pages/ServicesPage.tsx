@@ -72,7 +72,7 @@ export default function ServicesPage() {
                         alt={service.title}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E10] via-[#0B0E10]/50 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/35 to-transparent" />
                       <span className="absolute top-4 left-4 w-5 h-5 border-t border-l border-technical/60" />
                       <span className="absolute top-4 right-4 w-5 h-5 border-t border-r border-technical/60" />
 

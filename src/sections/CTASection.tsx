@@ -5,7 +5,7 @@ export default function CTASection() {
   return (
     <section className="relative overflow-hidden">
       <img src={images.cta} alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden />
-      <div className="absolute inset-0 bg-graphite/85" />
+      <div className="absolute inset-0 bg-graphite/70" />
       <div className="relative section-pad">
         <div className="site-container text-center max-w-2xl mx-auto">
           <p className="eyebrow mb-5">Get Started</p>

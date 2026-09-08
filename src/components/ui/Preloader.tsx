@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import Logo from './Logo';
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const reduced = useReducedMotion();
@@ -27,11 +28,9 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           transition={{ duration: 0.5 }}
         >
           <div className="text-center">
-            <img
-              src="/images/logo.png"
-              alt="UR Aerotech"
-              className="h-14 md:h-16 w-auto mx-auto object-contain"
-            />
+            <div className="flex justify-center">
+              <Logo height="lg" />
+            </div>
             <motion.div
               className="w-32 h-px bg-white/10 mt-6 mx-auto overflow-hidden"
             >

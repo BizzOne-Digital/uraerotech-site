@@ -36,7 +36,7 @@ export default function Header() {
   const linkClass = (href: string) => {
     const active = href === '/' ? location.pathname === '/' : location.pathname.startsWith(href);
     return `text-[11px] uppercase tracking-[0.18em] transition-colors ${
-      active ? 'text-[#58a6ff]' : 'text-white/80 hover:text-white'
+      active ? 'text-technical' : 'text-white/80 hover:text-white'
     }`;
   };
 
@@ -45,10 +45,10 @@ export default function Header() {
       <header
         className={`fixed top-0 inset-x-0 z-[70] transition-all duration-500 ${
           scrolled
-            ? 'bg-[#0a0d12]/95 backdrop-blur-md border-b border-white/[0.06] py-3'
+            ? 'bg-graphite/95 backdrop-blur-md border-b border-white/[0.08] py-3'
             : isHome
-              ? 'bg-gradient-to-b from-[#0a0d12]/70 to-transparent py-5 md:py-6'
-              : 'bg-[#0a0d12]/90 backdrop-blur-md py-4'
+              ? 'bg-gradient-to-b from-graphite/75 to-transparent py-5 md:py-6'
+              : 'bg-graphite/90 backdrop-blur-md py-4'
         }`}
       >
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-10 flex items-center justify-between gap-3 sm:gap-6 min-w-0">
@@ -69,7 +69,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-5 shrink-0">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="text-white/70 hover:text-[#58a6ff] transition-colors p-1"
+              className="text-white/70 hover:text-technical transition-colors p-1"
               aria-label="Search"
             >
               <IconSearch size={18} />
@@ -88,7 +88,7 @@ export default function Header() {
             )}
             <Link
               to="/quote"
-              className="inline-flex items-center px-5 py-2.5 bg-[#e2b04a] text-[#0a0d12] text-[10px] font-semibold uppercase tracking-[0.15em] hover:bg-[#ecc55e] transition-colors"
+              className="inline-flex items-center px-5 py-2.5 bg-[#e2b04a] text-graphite text-[10px] font-semibold uppercase tracking-[0.15em] hover:bg-[#ecc55e] transition-colors"
             >
               Request a Quote
             </Link>
@@ -109,7 +109,7 @@ export default function Header() {
             >
               <form action="/products" className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-10 py-3 flex gap-3">
                 <input name="search" type="text" placeholder="Search products, SKU, part number..." className="input flex-1" autoFocus />
-                <button type="submit" className="px-5 py-2 bg-[#e2b04a] text-[#0a0d12] text-xs uppercase tracking-wider font-semibold">Search</button>
+                <button type="submit" className="px-5 py-2 bg-[#e2b04a] text-graphite text-xs uppercase tracking-wider font-semibold">Search</button>
               </form>
             </motion.div>
           )}
@@ -124,7 +124,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[60] lg:hidden flex flex-col pt-24 px-6 sm:px-8 pb-8 bg-[#0a0d12] overflow-y-auto"
+            className="fixed inset-0 z-[60] lg:hidden flex flex-col pt-24 px-6 sm:px-8 pb-8 bg-navy overflow-y-auto"
           >
             <nav className="flex-1">
               {navLinks.map((link, i) => (

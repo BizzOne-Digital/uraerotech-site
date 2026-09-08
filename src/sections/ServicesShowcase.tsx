@@ -90,12 +90,12 @@ export default function ServicesShowcase({ services }: { services?: Service[] })
   }, [reduced, items.length]);
 
   return (
-    <section className="relative bg-[#0a0d12] overflow-x-clip">
+    <section className="relative bg-graphite overflow-x-clip">
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(#58a6ff 1px, transparent 1px), linear-gradient(90deg, #58a6ff 1px, transparent 1px)',
+            'linear-gradient(#4A90C2 1px, transparent 1px), linear-gradient(90deg, #4A90C2 1px, transparent 1px)',
           backgroundSize: '80px 80px',
         }}
       />
@@ -111,7 +111,7 @@ export default function ServicesShowcase({ services }: { services?: Service[] })
             />
             <Link
               to="/services"
-              className="hidden lg:inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#58a6ff] hover:text-white transition-colors shrink-0 mb-10"
+              className="hidden lg:inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] hover:text-white transition-colors shrink-0 mb-10"
             >
               View all services
               <IconArrowRight size={14} />
@@ -140,7 +140,7 @@ export default function ServicesShowcase({ services }: { services?: Service[] })
         ))}
         <Link
           to="/services"
-          className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#58a6ff] hover:text-white transition-colors pt-4"
+          className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] hover:text-white transition-colors pt-4"
         >
           View all services
           <IconArrowRight size={14} />
@@ -156,7 +156,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
   return (
     <Link
       to={`/services/${service.slug}`}
-      className="group relative shrink-0 w-full md:w-[320px] lg:w-[380px] max-w-full border border-white/[0.08] bg-[#111820] overflow-hidden transition-colors duration-500 hover:border-[#58a6ff]/40"
+      className="group relative shrink-0 w-full md:w-[320px] lg:w-[380px] max-w-full border border-white/[0.1] bg-surface overflow-hidden transition-colors duration-500 hover:border-technical/40"
     >
       <div className="aspect-[3/4] relative overflow-hidden">
         <img
@@ -171,23 +171,23 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
             }
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d12] via-[#0a0d12]/35 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/30 to-transparent" />
 
-        <span className="absolute top-4 left-4 w-5 h-5 border-t border-l border-[#58a6ff]/50" />
-        <span className="absolute top-4 right-4 w-5 h-5 border-t border-r border-[#58a6ff]/50" />
+        <span className="absolute top-4 left-4 w-5 h-5 border-t border-l border-[#4A90C2]/50" />
+        <span className="absolute top-4 right-4 w-5 h-5 border-t border-r border-[#4A90C2]/50" />
 
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <div className="flex items-center gap-3 mb-4">
-            <span className="font-mono text-[10px] tracking-[0.2em] text-[#58a6ff]">
+            <span className="font-mono text-[10px] tracking-[0.2em] text-[#4A90C2]">
               SVC — {String(index + 1).padStart(2, '0')}
             </span>
-            <span className="h-px flex-1 bg-[#58a6ff]/30" />
+            <span className="h-px flex-1 bg-[#4A90C2]/30" />
           </div>
-          <h3 className="font-heading text-xl text-white mb-2 leading-snug group-hover:text-[#58a6ff] transition-colors">
+          <h3 className="font-heading text-xl text-white mb-2 leading-snug group-hover:text-[#4A90C2] transition-colors">
             {service.title}
           </h3>
           <p className="text-sm text-white/55 line-clamp-2 leading-relaxed">{service.tagline}</p>
-          <span className="inline-flex items-center gap-2 mt-5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#58a6ff] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+          <span className="inline-flex items-center gap-2 mt-5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#4A90C2] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
             Explore service
             <IconArrowRight size={12} />
           </span>

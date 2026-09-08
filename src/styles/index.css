@@ -72,11 +72,11 @@
   }
 
   .btn-hero-gold {
-    @apply inline-flex items-center justify-center gap-2.5 px-5 sm:px-7 py-3 sm:py-3.5 bg-[#e2b04a] text-[#0a0d12] text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] sm:tracking-[0.14em] transition-all duration-300 hover:bg-[#ecc55e] max-w-full;
+    @apply inline-flex items-center justify-center gap-2.5 px-5 sm:px-7 py-3 sm:py-3.5 bg-[#e2b04a] text-graphite text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] sm:tracking-[0.14em] transition-all duration-300 hover:bg-[#ecc55e] max-w-full;
   }
 
   .btn-hero-ghost {
-    @apply inline-flex items-center justify-center gap-2.5 px-5 sm:px-7 py-3 sm:py-3.5 border border-[#58a6ff]/60 text-[#58a6ff] text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.12em] sm:tracking-[0.14em] transition-all duration-300 hover:bg-[#58a6ff]/10 hover:border-[#58a6ff] max-w-full;
+    @apply inline-flex items-center justify-center gap-2.5 px-5 sm:px-7 py-3 sm:py-3.5 border border-technical/60 text-technical text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.12em] sm:tracking-[0.14em] transition-all duration-300 hover:bg-technical/10 hover:border-technical max-w-full;
   }
 
   .card {
@@ -131,7 +131,7 @@
   }
 
   .card-technical:hover {
-    @apply border-technical/40 shadow-[0_0_40px_-12px_rgba(88,166,255,0.35)] -translate-y-1;
+    @apply border-technical/40 shadow-[0_0_40px_-12px_rgba(74,144,194,0.35)] -translate-y-1;
   }
 
   .service-card {
@@ -139,17 +139,17 @@
   }
 
   .service-card:hover {
-    @apply border-technical/45 shadow-[0_0_48px_-10px_rgba(88,166,255,0.4)];
+    @apply border-technical/45 shadow-[0_0_48px_-10px_rgba(74,144,194,0.4)];
   }
 
   .accent-glow {
-    box-shadow: 0 0 60px -15px rgba(88, 166, 255, 0.35);
+    box-shadow: 0 0 60px -15px rgba(74, 144, 194, 0.35);
   }
 
   .grid-bg {
     background-image:
-      linear-gradient(rgba(88, 166, 255, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(88, 166, 255, 0.06) 1px, transparent 1px);
+      linear-gradient(rgba(74, 144, 194, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74, 144, 194, 0.08) 1px, transparent 1px);
     background-size: 72px 72px;
   }
   .body-lg { @apply text-base md:text-lg text-steel leading-relaxed; }

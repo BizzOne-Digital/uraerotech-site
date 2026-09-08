@@ -58,7 +58,7 @@ export default function IndustriesSection({ industries }: { industries?: Industr
                         }
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-graphite/95 via-graphite/35 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/25 to-transparent" />
                     <div className="absolute bottom-0 p-6 md:p-8">
                       <h3 className="font-heading text-xl md:text-2xl text-white mb-2 group-hover:text-technical transition-colors">{ind.title}</h3>
                       <p className="text-sm text-white/70 max-w-sm">{ind.description}</p>

@@ -4,15 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        graphite: '#0B0E10',
-        navy: '#111820',
-        surface: '#161D24',
-        technical: '#58a6ff',
-        ice: '#B8E4FF',
+        graphite: '#162636',
+        navy: '#1e3a56',
+        surface: '#2a4660',
+        technical: '#4A90C2',
+        ice: '#B8D4EC',
         amber: '#E2B04A',
         offwhite: '#F4F3EE',
-        steel: '#9AA8B2',
-        muted: '#6B7785',
+        steel: '#A8BFD4',
+        muted: '#7A94AB',
+        brand: {
+          navy: '#1B4B7A',
+          blue: '#3D7AB8',
+          light: '#6BA3D4',
+        },
       },
       fontFamily: {
         heading: ['Sora', 'sans-serif'],

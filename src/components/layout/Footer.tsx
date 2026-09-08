@@ -22,26 +22,26 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#0a0d12] overflow-x-clip">
+    <footer className="relative bg-graphite overflow-x-clip">
       {/* subtle grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(#58a6ff 1px, transparent 1px), linear-gradient(90deg, #58a6ff 1px, transparent 1px)',
+            'linear-gradient(#4A90C2 1px, transparent 1px), linear-gradient(90deg, #4A90C2 1px, transparent 1px)',
           backgroundSize: '64px 64px',
         }}
       />
 
       {/* top accent */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#58a6ff]/40 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#4A90C2]/40 to-transparent" />
 
       {/* CTA strip */}
       <div className="relative border-b border-white/[0.06]">
         <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-10 py-10 md:py-12">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#58a6ff] mb-3">
+              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A90C2] mb-3">
                 Ready to start?
               </p>
               <h3 className="font-heading text-2xl md:text-3xl text-white leading-tight max-w-lg">
@@ -77,7 +77,7 @@ export default function Footer() {
                 {['FAA Standards', 'EASA Compliant', '20+ Years'].map((badge) => (
                   <span
                     key={badge}
-                    className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#58a6ff]/80 border border-[#58a6ff]/20 px-3 py-1.5"
+                    className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#4A90C2]/80 border border-[#4A90C2]/20 px-3 py-1.5"
                   >
                     {badge}
                   </span>
@@ -87,7 +87,7 @@ export default function Footer() {
 
             {/* Services */}
             <div className="lg:col-span-2 lg:col-start-6">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#58a6ff] mb-6">Services</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] mb-6">Services</p>
               <ul className="space-y-3">
                 {serviceLinks.map((link) => (
                   <li key={link.to}>
@@ -95,7 +95,7 @@ export default function Footer() {
                       to={link.to}
                       className="text-sm text-white/50 hover:text-white transition-colors inline-flex items-center gap-2 group"
                     >
-                      <span className="w-0 group-hover:w-2 h-px bg-[#58a6ff] transition-all duration-300" />
+                      <span className="w-0 group-hover:w-2 h-px bg-[#4A90C2] transition-all duration-300" />
                       {link.label}
                     </Link>
                   </li>
@@ -105,7 +105,7 @@ export default function Footer() {
 
             {/* Company */}
             <div className="lg:col-span-2">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#58a6ff] mb-6">Company</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] mb-6">Company</p>
               <ul className="space-y-3">
                 {companyLinks.map((link) => (
                   <li key={link.to}>
@@ -113,7 +113,7 @@ export default function Footer() {
                       to={link.to}
                       className="text-sm text-white/50 hover:text-white transition-colors inline-flex items-center gap-2 group"
                     >
-                      <span className="w-0 group-hover:w-2 h-px bg-[#58a6ff] transition-all duration-300" />
+                      <span className="w-0 group-hover:w-2 h-px bg-[#4A90C2] transition-all duration-300" />
                       {link.label}
                     </Link>
                   </li>
@@ -123,14 +123,14 @@ export default function Footer() {
 
             {/* Contact */}
             <div className="lg:col-span-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#58a6ff] mb-6">Contact</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] mb-6">Contact</p>
               <ul className="space-y-4">
                 <li>
                   <a
                     href="mailto:info@uraerotech.com"
                     className="flex items-start gap-3 text-sm text-white/50 hover:text-white transition-colors group"
                   >
-                    <IconMail size={16} className="text-[#58a6ff] shrink-0 mt-0.5" />
+                    <IconMail size={16} className="text-[#4A90C2] shrink-0 mt-0.5" />
                     info@uraerotech.com
                   </a>
                 </li>
@@ -139,7 +139,7 @@ export default function Footer() {
                     href="tel:+491732504540"
                     className="flex items-start gap-3 text-sm text-white/50 hover:text-white transition-colors"
                   >
-                    <IconPhone size={16} className="text-[#58a6ff] shrink-0 mt-0.5" />
+                    <IconPhone size={16} className="text-[#4A90C2] shrink-0 mt-0.5" />
                     +49 173 250 4540
                   </a>
                 </li>
@@ -148,12 +148,12 @@ export default function Footer() {
                     href="tel:+491732498648"
                     className="flex items-start gap-3 text-sm text-white/50 hover:text-white transition-colors"
                   >
-                    <IconPhone size={16} className="text-[#58a6ff] shrink-0 mt-0.5" />
+                    <IconPhone size={16} className="text-[#4A90C2] shrink-0 mt-0.5" />
                     +49 173 249 8648
                   </a>
                 </li>
                 <li className="flex items-start gap-3 text-sm text-white/50">
-                  <IconMapPin size={16} className="text-[#58a6ff] shrink-0 mt-0.5" />
+                  <IconMapPin size={16} className="text-[#4A90C2] shrink-0 mt-0.5" />
                   <span>Gaterstr. 66B, 52538 Gangelt, Germany</span>
                 </li>
               </ul>
@@ -169,17 +169,17 @@ export default function Footer() {
             © {year} UR Aerotech GmbH. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-6">
-            <Link to="/contact" className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 hover:text-[#58a6ff] transition-colors">
+            <Link to="/contact" className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 hover:text-[#4A90C2] transition-colors">
               Privacy
             </Link>
-            <Link to="/contact" className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 hover:text-[#58a6ff] transition-colors">
+            <Link to="/contact" className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 hover:text-[#4A90C2] transition-colors">
               Terms
             </Link>
             <a
               href="https://uraerotech.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 hover:text-[#58a6ff] transition-colors"
+              className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 hover:text-[#4A90C2] transition-colors"
             >
               uraerotech.com
             </a>
