@@ -36,7 +36,7 @@ export default function Header() {
   const linkClass = (href: string) => {
     const active = href === '/' ? location.pathname === '/' : location.pathname.startsWith(href);
     return `text-[11px] uppercase tracking-[0.18em] transition-colors ${
-      active ? 'text-technical' : 'text-white/80 hover:text-white'
+      active ? 'text-gold' : 'text-white/80 hover:text-white'
     }`;
   };
 
@@ -88,7 +88,7 @@ export default function Header() {
             )}
             <Link
               to="/quote"
-              className="inline-flex items-center px-5 py-2.5 bg-[#e2b04a] text-graphite text-[10px] font-semibold uppercase tracking-[0.15em] hover:bg-[#ecc55e] transition-colors"
+              className="inline-flex items-center px-5 py-2.5 bg-gold text-midnight text-[10px] font-semibold uppercase tracking-[0.15em] hover:bg-amber transition-colors"
             >
               Request a Quote
             </Link>

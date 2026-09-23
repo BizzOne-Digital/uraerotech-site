@@ -1,198 +1,67 @@
-import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SectionHeader from '../components/ui/SectionHeader';
 import { IconArrowRight } from '../components/icons';
 import { getServiceImage } from '../assets/images';
-import { useReducedMotion } from '../hooks/useReducedMotion';
+import ScrollReveal from '../components/ui/ScrollReveal';
 import type { Service } from '../types';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const defaults: Pick<Service, 'title' | 'slug' | 'tagline'>[] = [
-  { title: 'Aircraft Structural Repair', slug: 'aircraft-structural-repair', tagline: 'Expert structural repairs to keep your aircraft safe, reliable, and airworthy.' },
-  { title: 'Structure Modification', slug: 'aircraft-structure-modification', tagline: 'Tailored modifications to enhance performance and capabilities.' },
-  { title: 'Service Bulletin Compliance', slug: 'service-bulletin-compliance', tagline: 'Keep your aircraft up to date and fully compliant.' },
-  { title: 'Aircraft Parts Supply', slug: 'aircraft-parts-supply', tagline: 'Certified parts sourced from trusted manufacturers.' },
-  { title: 'Aviation Tools Sales', slug: 'aviation-tools-sales', tagline: 'Premium tools for professional aircraft maintenance.' },
-  { title: 'Aviation Tool Rental', slug: 'aviation-tool-rental', tagline: 'Flexible tooling for short-term projects.' },
+const defaults: Pick<Service, 'title' | 'slug'>[] = [
+  { title: 'Structural Repair', slug: 'aircraft-structural-repair' },
+  { title: 'Aircraft Modification', slug: 'aircraft-structure-modification' },
+  { title: 'Service Bulletin Compliance', slug: 'service-bulletin-compliance' },
+  { title: 'Parts Supply', slug: 'aircraft-parts-supply' },
+  { title: 'Tool Sales', slug: 'aviation-tools-sales' },
+  { title: 'Tool Rental', slug: 'aviation-tool-rental' },
 ];
 
-type ServiceItem = (typeof defaults)[number] & { heroImage?: string };
-
-function serviceImage(service: ServiceItem, index: number) {
-  if (service.heroImage?.startsWith('/images/')) return service.heroImage;
-  return getServiceImage(service.slug, index);
-}
-
 export default function ServicesShowcase({ services }: { services?: Service[] }) {
-  const pinRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-
-  const items: ServiceItem[] = services?.length
-    ? services.map((s) => ({
-        title: s.title,
-        slug: s.slug,
-        tagline: s.tagline,
-        heroImage: s.heroImage?.startsWith('/images/') ? s.heroImage : undefined,
-      }))
+  const items = services?.length
+    ? services.slice(0, 6).map((s) => ({ title: s.title, slug: s.slug }))
     : defaults;
 
-  useEffect(() => {
-    if (reduced) return;
-    const pinWrap = pinRef.current;
-    const track = trackRef.current;
-    if (!pinWrap || !track) return;
-
-    const scroller = document.documentElement;
-    let tween: gsap.core.Tween | null = null;
-    const mm = gsap.matchMedia();
-
-    mm.add('(min-width: 768px)', () => {
-      const getDistance = () => Math.max(track.scrollWidth - pinWrap.offsetWidth + 48, 0);
-
-      tween = gsap.to(track, {
-        x: () => -getDistance(),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: pinWrap,
-          scroller,
-          start: 'top top',
-          end: () => `+=${getDistance()}`,
-          pin: true,
-          scrub: 0.6,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      return () => {
-        tween?.scrollTrigger?.kill();
-        tween?.kill();
-        gsap.set(track, { clearProps: 'transform' });
-      };
-    });
-
-    const refresh = () => ScrollTrigger.refresh();
-    const onResize = () => ScrollTrigger.refresh();
-    window.addEventListener('resize', onResize);
-    window.addEventListener('load', refresh);
-    const t = window.setTimeout(refresh, 400);
-
-    return () => {
-      window.removeEventListener('resize', onResize);
-      window.removeEventListener('load', refresh);
-      window.clearTimeout(t);
-      mm.revert();
-    };
-  }, [reduced, items.length]);
-
   return (
-    <section className="relative bg-graphite overflow-x-clip">
-      <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(#4A90C2 1px, transparent 1px), linear-gradient(90deg, #4A90C2 1px, transparent 1px)',
-          backgroundSize: '80px 80px',
-        }}
-      />
-
-      {/* Header scrolls normally — not pinned */}
-      <div className="relative z-10 px-4 sm:px-8 lg:px-10 pt-20 md:pt-24 pb-8 md:pb-10">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <SectionHeader
-              label="Services"
-              title="Structural repair & aviation services"
-              description="From damage assessment to certified release — comprehensive solutions for every airframe requirement."
-            />
-            <Link
-              to="/services"
-              className="hidden lg:inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] hover:text-white transition-colors shrink-0 mb-10"
-            >
-              View all services
-              <IconArrowRight size={14} />
-            </Link>
+    <section className="bg-offwhite text-midnight">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-10 py-16 md:py-24">
+        <ScrollReveal>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-end mb-12 md:mb-16">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold mb-4">What We Do</p>
+              <h2 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] text-midnight leading-tight">
+                Comprehensive Aviation Solutions
+              </h2>
+            </div>
+            <p className="text-muted text-base leading-relaxed lg:pb-1">
+              From structural repair and modifications to certified parts and tooling — end-to-end support for
+              operators, MROs, and aviation professionals worldwide.
+            </p>
           </div>
-        </div>
-      </div>
+        </ScrollReveal>
 
-      {/* Only cards area pins for horizontal scroll */}
-      <div
-        ref={pinRef}
-        className="hidden md:flex relative z-10 overflow-hidden items-center min-h-[min(78vh,720px)] pb-12"
-      >
-        <div ref={trackRef} className="flex gap-5 pl-5 sm:pl-8 lg:pl-10 w-max will-change-transform">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {items.map((service, i) => (
-            <ServiceCard key={service.slug} service={service} index={i} />
+            <ScrollReveal key={service.slug} delay={i * 0.05}>
+              <Link
+                to={`/services/${service.slug}`}
+                className="group relative block aspect-[4/3] overflow-hidden bg-midnight"
+              >
+                <img
+                  src={getServiceImage(service.slug, i)}
+                  alt={service.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
+                  <h3 className="font-heading text-lg text-white group-hover:text-gold transition-colors">
+                    {service.title}
+                  </h3>
+                  <span className="shrink-0 w-9 h-9 flex items-center justify-center border border-gold/50 text-gold group-hover:bg-gold group-hover:text-midnight transition-colors">
+                    <IconArrowRight size={16} />
+                  </span>
+                </div>
+              </Link>
+            </ScrollReveal>
           ))}
-          <div className="w-[6vw] shrink-0" aria-hidden />
         </div>
-      </div>
-
-      {/* Mobile stack */}
-      <div className="md:hidden relative z-10 px-4 sm:px-8 pb-12 space-y-5 max-w-full">
-        {items.map((service, i) => (
-          <ServiceCard key={service.slug} service={service} index={i} />
-        ))}
-        <Link
-          to="/services"
-          className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] hover:text-white transition-colors pt-4"
-        >
-          View all services
-          <IconArrowRight size={14} />
-        </Link>
       </div>
     </section>
-  );
-}
-
-function ServiceCard({ service, index }: { service: ServiceItem; index: number }) {
-  const src = serviceImage(service, index);
-
-  return (
-    <Link
-      to={`/services/${service.slug}`}
-      className="group relative shrink-0 w-full md:w-[320px] lg:w-[380px] max-w-full border border-white/[0.1] bg-surface overflow-hidden transition-colors duration-500 hover:border-technical/40"
-    >
-      <div className="aspect-[3/4] relative overflow-hidden">
-        <img
-          src={src}
-          alt={service.title}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          onError={(e) => {
-            const target = e.currentTarget;
-            if (!target.dataset.fallback) {
-              target.dataset.fallback = '1';
-              target.src = getServiceImage(service.slug, index);
-            }
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/30 to-transparent" />
-
-        <span className="absolute top-4 left-4 w-5 h-5 border-t border-l border-[#4A90C2]/50" />
-        <span className="absolute top-4 right-4 w-5 h-5 border-t border-r border-[#4A90C2]/50" />
-
-        <div className="absolute bottom-0 left-0 right-0 p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="font-mono text-[10px] tracking-[0.2em] text-[#4A90C2]">
-              SVC — {String(index + 1).padStart(2, '0')}
-            </span>
-            <span className="h-px flex-1 bg-[#4A90C2]/30" />
-          </div>
-          <h3 className="font-heading text-xl text-white mb-2 leading-snug group-hover:text-[#4A90C2] transition-colors">
-            {service.title}
-          </h3>
-          <p className="text-sm text-white/55 line-clamp-2 leading-relaxed">{service.tagline}</p>
-          <span className="inline-flex items-center gap-2 mt-5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#4A90C2] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-            Explore service
-            <IconArrowRight size={12} />
-          </span>
-        </div>
-      </div>
-    </Link>
   );
 }

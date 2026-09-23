@@ -10,6 +10,8 @@ export default {
         technical: '#4A90C2',
         ice: '#B8D4EC',
         amber: '#E2B04A',
+        gold: '#C5A059',
+        midnight: '#0B1119',
         offwhite: '#F4F3EE',
         steel: '#A8BFD4',
         muted: '#7A94AB',
@@ -20,6 +22,7 @@ export default {
         },
       },
       fontFamily: {
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
         heading: ['Sora', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'monospace'],

@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { IconShield, IconGear, IconBox, IconArrowRight } from '../components/icons';
+import { IconShield, IconGlobe, IconBox, IconClock, IconArrowRight } from '../components/icons';
 
 const HERO_BG = '/images/hero-hangar.jpg';
+const HERO_VIDEO = '/videos/hero-hangar.mp4';
 
 const defaultHero = {
-  section: '01 / Structural Excellence',
-  eyebrow: 'Expert Aircraft Structure Repair',
-  headline: 'Structure Repair & Sales',
+  eyebrow: 'Keeping the World in Flight',
+  headline: 'Expert Engineering for a Higher Standard',
   subheadline:
-    '20+ Years of Excellence in Aircraft Structural Repairs and Modifications. Supplying certified aircraft parts, aviation tools, and industry-leading services — all in one place.',
-  ctaPrimary: 'Get a Quote',
-  ctaSecondary: 'Browse Inventory',
+    'World-class aircraft structural repair, modification, and certified parts supply — precision you can trust in every airframe.',
+  ctaPrimary: 'Our Services',
+  ctaSecondary: 'Get a Quote',
 };
 
 interface HeroProps {
@@ -23,137 +23,135 @@ interface HeroProps {
     ctaPrimary?: string;
     ctaSecondary?: string;
   };
+  statistics?: { label: string; value: string; suffix?: string }[];
 }
 
-export default function HeroSection({ data }: HeroProps) {
+const defaultStats = [
+  { value: '20+', label: 'Years of Excellence' },
+  { value: '1,000+', label: 'Clients Worldwide' },
+  { value: '50,000+', label: 'Parts in Stock' },
+  { value: '99.8%', label: 'On-Time Delivery' },
+];
+
+export default function HeroSection({ data, statistics }: HeroProps) {
   const hero = { ...defaultHero, ...data };
   const bg = hero.image && !hero.image.includes('unsplash') ? hero.image : HERO_BG;
-
-  const stats = [
-    { icon: IconShield, value: '20+', label: 'Years Experience' },
-    { icon: IconGear, value: '5,000+', label: 'Projects' },
-    { icon: IconBox, value: '50K+', label: 'Parts' },
-  ];
+  const stats = statistics?.length
+    ? statistics.slice(0, 4).map((s) => ({
+        value: `${s.value}${s.suffix ?? ''}`,
+        label: s.label,
+      }))
+    : defaultStats;
 
   return (
-    <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-graphite">
-      {/* Background */}
+    <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-midnight">
       <div className="absolute inset-0">
-        <img
-          src={bg}
-          alt="Aircraft technicians performing structural repair inside a hangar"
-          className="w-full h-full object-cover object-[center_30%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-graphite/75 via-graphite/40 to-graphite/15" />
-        <div className="absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/25 to-transparent" />
+        <video
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={bg}
+          aria-hidden
+        >
+          <source src={HERO_VIDEO} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-midnight/95 via-midnight/55 to-midnight/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/35 to-transparent" />
       </div>
 
-      {/* HUD overlay */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-60 hidden sm:block"
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="xMidYMid slice"
+      <div
+        className="hidden xl:flex absolute right-6 top-1/2 -translate-y-1/2 z-10 flex-col items-center gap-4 text-gold/80"
         aria-hidden
       >
-        <line x1="0" y1="280" x2="1440" y2="280" stroke="#4A90C2" strokeWidth="0.4" strokeDasharray="4 8" opacity="0.4" />
-        <line x1="680" y1="0" x2="680" y2="900" stroke="#4A90C2" strokeWidth="0.4" strokeDasharray="4 8" opacity="0.3" />
-        <circle cx="680" cy="280" r="5" fill="none" stroke="#4A90C2" strokeWidth="0.6" opacity="0.6" />
-        <circle cx="680" cy="280" r="12" fill="none" stroke="#4A90C2" strokeWidth="0.4" opacity="0.4" />
-        <line x1="680" y1="280" x2="780" y2="200" stroke="#4A90C2" strokeWidth="0.5" opacity="0.5" />
-        <text x="790" y="198" fill="#4A90C2" fontSize="8" fontFamily="monospace" opacity="0.7">STA 558.75</text>
-        <line x1="900" y1="350" x2="1050" y2="350" stroke="#4A90C2" strokeWidth="0.4" opacity="0.4" />
-        <text x="1060" y="354" fill="#4A90C2" fontSize="8" fontFamily="monospace" opacity="0.7">WL 192.50</text>
-        <rect x="950" y="420" width="140" height="52" fill="none" stroke="#4A90C2" strokeWidth="0.5" opacity="0.5" />
-        <text x="960" y="438" fill="#4A90C2" fontSize="7" fontFamily="monospace" opacity="0.8">P/N 112A320-4</text>
-        <text x="960" y="452" fill="#8aa4be" fontSize="7" fontFamily="monospace" opacity="0.7">ALCLAD 2024-T3</text>
-        <text x="960" y="466" fill="#8aa4be" fontSize="7" fontFamily="monospace" opacity="0.7">S/N 55214</text>
-        <circle cx="1100" cy="500" r="4" fill="#4A90C2" opacity="0.5" />
-        <line x1="1100" y1="500" x2="1100" y2="560" stroke="#4A90C2" strokeWidth="0.4" strokeDasharray="3 3" opacity="0.4" />
-      </svg>
+        <span className="w-px h-16 bg-gold/40" />
+        <span
+          className="font-mono text-[10px] uppercase tracking-[0.35em] [writing-mode:vertical-rl] rotate-180"
+        >
+          Safer · Stronger · Further
+        </span>
+        <span className="w-px h-16 bg-gold/40" />
+      </div>
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-full px-4 sm:px-8 lg:px-10 pt-28 sm:pt-32 pb-0">
+      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-10 pt-28 sm:pt-36 pb-0">
         <div className="max-w-[1440px] mx-auto">
-          {/* Section tag */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center gap-4 mb-8"
-          >
-            <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#4A90C2]">
-              {defaultHero.section}
-            </span>
-            <span className="h-px flex-1 max-w-[120px] bg-[#4A90C2]/50" />
-          </motion.div>
-
-          <div className="max-w-3xl">
+          <div className="max-w-2xl">
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.16em] sm:tracking-[0.28em] text-[#4A90C2] mb-5 break-words"
+              transition={{ delay: 0.2 }}
+              className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-gold mb-5"
             >
               {hero.eyebrow}
             </motion.p>
 
             <motion.h1
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.7 }}
-              className="font-heading font-bold text-[clamp(2rem,8vw,5rem)] leading-[1.05] tracking-[-0.02em] text-white mb-6 sm:mb-7 break-words"
+              transition={{ delay: 0.35, duration: 0.7 }}
+              className="font-display text-[clamp(2.25rem,6vw,4.25rem)] leading-[1.08] text-white mb-6"
             >
               {hero.headline}
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="text-[15px] md:text-base text-white/65 leading-relaxed max-w-xl mb-10"
+              transition={{ delay: 0.5 }}
+              className="text-base text-white/70 leading-relaxed max-w-xl mb-10"
             >
               {hero.subheadline}
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.75 }}
+              transition={{ delay: 0.65 }}
               className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4"
             >
-              <Link to="/quote" className="btn-hero-gold w-full sm:w-auto">
+              <Link
+                to="/services"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gold text-midnight text-[11px] font-semibold uppercase tracking-[0.14em] hover:bg-amber transition-colors"
+              >
                 {hero.ctaPrimary}
                 <IconArrowRight size={16} />
               </Link>
-              <Link to="/products" className="btn-hero-ghost w-full sm:w-auto">
+              <Link
+                to="/quote"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/35 text-white text-[11px] font-medium uppercase tracking-[0.14em] hover:bg-white/10 transition-colors"
+              >
                 {hero.ctaSecondary}
-                <IconArrowRight size={16} />
               </Link>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Stats bar */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9 }}
-        className="relative z-10 mt-16 md:mt-20 border-t border-white/[0.08] bg-graphite/50 backdrop-blur-sm"
+        transition={{ delay: 0.85 }}
+        className="relative z-10 mt-14 md:mt-20 border-t border-white/[0.08] bg-midnight/75 backdrop-blur-md"
       >
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-10">
-          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/[0.08]">
-            {stats.map((s) => (
-              <div key={s.label} className="flex items-center gap-4 py-6 md:py-7 sm:px-8 first:sm:pl-0">
-                <div className="w-10 h-10 flex items-center justify-center border border-[#4A90C2]/30 text-[#4A90C2]">
-                  <s.icon size={18} />
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.08]">
+            {stats.map((s, i) => {
+              const StatIcon = [IconShield, IconGlobe, IconBox, IconClock][i] ?? IconShield;
+              return (
+              <div
+                key={s.label}
+                className="flex items-center gap-3 sm:gap-4 py-6 md:py-8 px-3 sm:px-6"
+              >
+                <div className="hidden sm:flex w-10 h-10 shrink-0 items-center justify-center rounded-full border border-gold/40 text-gold">
+                  <StatIcon size={18} />
                 </div>
-                <div>
-                  <p className="font-heading text-2xl md:text-3xl font-semibold text-white leading-none">{s.value}</p>
-                  <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#4A90C2] mt-1.5">{s.label}</p>
+                <div className="min-w-0">
+                  <p className="font-display text-xl sm:text-2xl md:text-3xl text-white leading-none">{s.value}</p>
+                  <p className="text-[10px] sm:text-[11px] text-white/55 mt-1.5 leading-snug">{s.label}</p>
                 </div>
               </div>
-            ))}
+            );})}
           </div>
         </div>
       </motion.div>

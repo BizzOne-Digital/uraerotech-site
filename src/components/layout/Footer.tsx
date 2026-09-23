@@ -22,7 +22,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-graphite overflow-x-clip">
+    <footer className="relative bg-midnight overflow-x-clip">
       {/* subtle grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
