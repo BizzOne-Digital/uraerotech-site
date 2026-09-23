@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { IconMail, IconPhone, IconMapPin, IconArrowRight, IconGlobe } from '../icons';
 import Logo from '../ui/Logo';
+import { SITE_CONTACT } from '../../constants/siteContact';
 
 const quickLinks = [
   { label: 'Home', to: '/' },
@@ -21,12 +22,6 @@ const serviceLinks = [
 ];
 
 const accountLinks = [{ label: 'Request a Quote', to: '/quote' }];
-
-const socialLinks = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/', short: 'in' },
-  { label: 'YouTube', href: 'https://www.youtube.com/', short: 'yt' },
-  { label: 'Instagram', href: 'https://www.instagram.com/', short: 'ig' },
-];
 
 function FooterLink({ to, children }: { to: string; children: ReactNode }) {
   return (
@@ -91,12 +86,12 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-10">
             {/* Brand */}
             <div className="sm:col-span-2 lg:col-span-4 xl:col-span-3">
-              <Logo height="lg" className="mb-5" />
+              <Logo height="xl" className="mb-5" />
               <p className="font-body text-sm text-white/55 leading-relaxed max-w-sm mb-6">
                 Aircraft structural repair, modification, and certified parts supply. Serving airlines, MROs, and
                 operators from Gangelt, Germany.
               </p>
-              <div className="flex flex-wrap gap-2 mb-7">
+              <div className="flex flex-wrap gap-2">
                 {['FAA Standards', 'EASA Compliant', '20+ Years'].map((badge) => (
                   <span
                     key={badge}
@@ -104,20 +99,6 @@ export default function Footer() {
                   >
                     {badge}
                   </span>
-                ))}
-              </div>
-              <div className="flex items-center gap-3">
-                {socialLinks.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.label}
-                    className="w-9 h-9 rounded-full border border-gold/35 flex items-center justify-center font-mono text-[9px] uppercase text-gold/80 hover:bg-gold hover:text-[#0A0E14] hover:border-gold transition-colors"
-                  >
-                    {s.short}
-                  </a>
                 ))}
               </div>
             </div>
@@ -170,34 +151,34 @@ export default function Footer() {
                   <ul className="space-y-3.5">
                     <li>
                       <a
-                        href="mailto:info@uraerotech.com"
+                        href={`mailto:${SITE_CONTACT.email}`}
                         className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
                       >
                         <IconMail size={16} className="text-gold shrink-0 mt-0.5" />
-                        info@uraerotech.com
+                        {SITE_CONTACT.email}
                       </a>
                     </li>
+                    {SITE_CONTACT.phones.map((phone) => (
+                      <li key={phone.tel}>
+                        <a
+                          href={`tel:${phone.tel}`}
+                          className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
+                        >
+                          <IconPhone size={16} className="text-gold shrink-0 mt-0.5" />
+                          {phone.display}
+                        </a>
+                      </li>
+                    ))}
                     <li>
                       <a
-                        href="tel:+491732504540"
+                        href={SITE_CONTACT.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
                       >
-                        <IconPhone size={16} className="text-gold shrink-0 mt-0.5" />
-                        +49 173 250 4540
+                        <IconMapPin size={16} className="text-gold shrink-0 mt-0.5" />
+                        <span>{SITE_CONTACT.address}</span>
                       </a>
-                    </li>
-                    <li>
-                      <a
-                        href="tel:+491732498648"
-                        className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
-                      >
-                        <IconPhone size={16} className="text-gold shrink-0 mt-0.5" />
-                        +49 173 249 8648
-                      </a>
-                    </li>
-                    <li className="flex items-start gap-3 text-sm text-white/55">
-                      <IconMapPin size={16} className="text-gold shrink-0 mt-0.5" />
-                      <span>Gaterstr. 66B, 52538 Gangelt, Germany</span>
                     </li>
                   </ul>
                 </div>
@@ -237,7 +218,7 @@ export default function Footer() {
               </Link>
             ))}
             <a
-              href="https://uraerotech.com"
+              href={SITE_CONTACT.website}
               target="_blank"
               rel="noopener noreferrer"
               className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/35 hover:text-gold transition-colors"
