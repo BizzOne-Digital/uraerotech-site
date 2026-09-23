@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
-const LOGO_SRC = '/images/logo.png';
+const LOGO_SRC = '/images/logo.jpg';
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const reduced = useReducedMotion();

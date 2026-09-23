@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const LOGO_SRC = '/images/logo.png';
+const LOGO_SRC = '/images/logo.jpg';
 
 interface LogoProps {
   className?: string;
