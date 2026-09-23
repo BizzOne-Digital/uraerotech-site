@@ -30,6 +30,17 @@ export default {
       maxWidth: {
         site: '1320px',
       },
+      screens: {
+        xs: '375px',
+      },
+      minHeight: {
+        'screen-safe': 'calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))',
+      },
+      padding: {
+        'safe-t': 'env(safe-area-inset-top, 0px)',
+        'safe-b': 'env(safe-area-inset-bottom, 0px)',
+        'safe-x': 'max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px))',
+      },
       animation: {
         marquee: 'marquee 40s linear infinite',
         'fade-up': 'fadeUp 0.8s ease-out forwards',

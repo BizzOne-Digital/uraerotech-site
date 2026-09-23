@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import SEO from '../components/ui/SEO';
-import Button from '../components/ui/Button';
+import PageHero from '../components/ui/PageHero';
+import { pageHero } from '../assets/images';
 import { inquiryApi } from '../services';
 import { getServices } from '../services/content';
 import type { Service } from '../types';
+import { IconArrowRight } from '../components/icons';
 
 interface QuoteForm {
   fullName: string;
@@ -63,16 +65,18 @@ export default function QuotePage() {
 
   if (submitted) {
     return (
-      <section className="min-h-screen flex items-center justify-center bg-graphite section-padding">
-        <div className="data-plate p-12 text-center max-w-lg">
-          <p className="technical-label text-technical mb-4">Quote Submitted</p>
-          <h1 className="heading-md mb-4">Thank You</h1>
-          <p className="text-steel mb-6">Your quote request has been received. Our team will review it shortly.</p>
-          <div className="data-plate p-4 mb-6">
-            <p className="font-mono text-[10px] text-steel">Reference Number</p>
-            <p className="font-heading text-2xl text-technical">{reference}</p>
+      <section className="min-h-screen flex items-center justify-center bg-midnight px-4">
+        <div className="border border-gold/30 p-12 text-center max-w-lg w-full">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-gold mb-4">Quote Submitted</p>
+          <h1 className="font-display text-2xl text-white mb-4">Thank You</h1>
+          <p className="text-white/60 mb-6">Your quote request has been received. Our team will review it shortly.</p>
+          <div className="border border-gold/20 p-4 mb-6">
+            <p className="font-mono text-[10px] text-white/40">Reference Number</p>
+            <p className="font-display text-2xl text-gold">{reference}</p>
           </div>
-          <Button to="/dashboard" variant="primary">Track Your Request</Button>
+          <Link to="/contact" className="btn-hero-gold inline-flex justify-center">
+            Contact Us
+          </Link>
         </div>
       </section>
     );
@@ -82,54 +86,52 @@ export default function QuotePage() {
     <>
       <SEO title="Request a Quote — UR Aerotech" description="Submit a detailed quote request for aircraft structural repair or parts." />
 
-      <section className="pt-32 pb-16 bg-navy">
-        <div className="section-padding !pt-8">
-          <div className="container-custom">
-            <p className="technical-label text-technical mb-4">Quote Request</p>
-            <h1 className="heading-xl mb-6">Request a Quote</h1>
-            <p className="text-steel text-lg max-w-2xl">Fill out the form below and our team will respond with a detailed quote.</p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Get a Quote"
+        headline="Request a Detailed Quote"
+        subheadline="Share your aircraft, service, or parts requirements — we respond with clear scope and timing."
+        image={pageHero.quote}
+        showStats={false}
+      />
 
-      <section className="section-padding bg-graphite">
-        <div className="container-custom max-w-3xl">
-          <form onSubmit={handleSubmit(onSubmit)} className="data-plate p-8 space-y-6">
+      <section className="bg-midnight border-t border-white/[0.06]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-10 py-16 md:py-24">
+          <form onSubmit={handleSubmit(onSubmit)} className="max-w-3xl mx-auto space-y-6">
             {error && <p className="text-red-400 text-sm">{error}</p>}
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="technical-label block mb-2">Full Name *</label>
-                <input {...register('fullName', { required: true })} className="input-field" />
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Full Name *</label>
+                <input {...register('fullName', { required: true })} className="input border-white/10 focus:border-gold/50" />
               </div>
               <div>
-                <label className="technical-label block mb-2">Email *</label>
-                <input {...register('email', { required: true })} type="email" className="input-field" />
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="technical-label block mb-2">Phone *</label>
-                <input {...register('phone', { required: true })} className="input-field" />
-              </div>
-              <div>
-                <label className="technical-label block mb-2">Company</label>
-                <input {...register('company')} className="input-field" />
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Email *</label>
+                <input {...register('email', { required: true })} type="email" className="input border-white/10 focus:border-gold/50" />
               </div>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="technical-label block mb-2">Account Type</label>
-                <select {...register('accountType')} className="input-field">
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Phone *</label>
+                <input {...register('phone', { required: true })} className="input border-white/10 focus:border-gold/50" />
+              </div>
+              <div>
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Company</label>
+                <input {...register('company')} className="input border-white/10 focus:border-gold/50" />
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Account Type</label>
+                <select {...register('accountType')} className="input border-white/10 focus:border-gold/50">
                   <option value="individual">Individual</option>
                   <option value="business">Business</option>
                 </select>
               </div>
               <div>
-                <label className="technical-label block mb-2">Request Type</label>
-                <select {...register('requestType')} className="input-field">
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Request Type</label>
+                <select {...register('requestType')} className="input border-white/10 focus:border-gold/50">
                   <option value="service">Service</option>
                   <option value="product">Product</option>
                   <option value="general">General Inquiry</option>
@@ -138,8 +140,8 @@ export default function QuotePage() {
             </div>
 
             <div>
-              <label className="technical-label block mb-2">Service</label>
-              <select {...register('service')} className="input-field">
+              <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Service</label>
+              <select {...register('service')} className="input border-white/10 focus:border-gold/50">
                 <option value="">Select a service</option>
                 {services.map((s) => (
                   <option key={s._id} value={s.slug}>{s.title}</option>
@@ -149,31 +151,31 @@ export default function QuotePage() {
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="technical-label block mb-2">Aircraft Manufacturer</label>
-                <input {...register('aircraftManufacturer')} className="input-field" placeholder="e.g. Boeing, Airbus" />
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Aircraft Manufacturer</label>
+                <input {...register('aircraftManufacturer')} className="input border-white/10 focus:border-gold/50" placeholder="e.g. Boeing, Airbus" />
               </div>
               <div>
-                <label className="technical-label block mb-2">Aircraft Model</label>
-                <input {...register('aircraftModel')} className="input-field" placeholder="e.g. 737-800" />
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Aircraft Model</label>
+                <input {...register('aircraftModel')} className="input border-white/10 focus:border-gold/50" placeholder="e.g. 737-800" />
               </div>
             </div>
 
             <div className="grid sm:grid-cols-3 gap-4">
               <div>
-                <label className="technical-label block mb-2">Part Number</label>
-                <input {...register('partNumber')} className="input-field" />
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Part Number</label>
+                <input {...register('partNumber')} className="input border-white/10 focus:border-gold/50" />
               </div>
               <div>
-                <label className="technical-label block mb-2">Urgency</label>
-                <select {...register('urgency')} className="input-field">
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Urgency</label>
+                <select {...register('urgency')} className="input border-white/10 focus:border-gold/50">
                   <option value="standard">Standard</option>
                   <option value="urgent">Urgent</option>
                   <option value="aog">AOG</option>
                 </select>
               </div>
               <div>
-                <label className="technical-label block mb-2">Response Method</label>
-                <select {...register('responseMethod')} className="input-field">
+                <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Response Method</label>
+                <select {...register('responseMethod')} className="input border-white/10 focus:border-gold/50">
                   <option value="email">Email</option>
                   <option value="phone">Phone</option>
                   <option value="both">Both</option>
@@ -182,23 +184,28 @@ export default function QuotePage() {
             </div>
 
             <div>
-              <label className="technical-label block mb-2">Detailed Message *</label>
-              <textarea {...register('message', { required: true })} className="textarea-field" rows={5} />
+              <label className="font-mono text-[9px] uppercase text-gold tracking-widest mb-2 block">Detailed Message *</label>
+              <textarea {...register('message', { required: true })} className="textarea-field border-white/10 focus:border-gold/50" rows={5} />
             </div>
 
             <label className="flex items-center gap-3 cursor-pointer">
-              <input {...register('isAOG')} type="checkbox" className="w-4 h-4 accent-amber" />
-              <span className="text-sm text-amber">AOG — Aircraft on Ground emergency</span>
+              <input {...register('isAOG')} type="checkbox" className="w-4 h-4 accent-gold" />
+              <span className="text-sm text-gold">AOG — Aircraft on Ground emergency</span>
             </label>
 
             <label className="flex items-start gap-3 cursor-pointer">
-              <input {...register('consent', { required: true })} type="checkbox" className="w-4 h-4 accent-technical mt-1" />
-              <span className="text-sm text-steel">I consent to UR Aerotech processing my data to respond to this inquiry. *</span>
+              <input {...register('consent', { required: true })} type="checkbox" className="w-4 h-4 accent-gold mt-1" />
+              <span className="text-sm text-white/50">I consent to UR Aerotech processing my data to respond to this inquiry. *</span>
             </label>
 
-            <Button type="submit" variant="amber" disabled={isSubmitting} className="w-full justify-center">
-              {isSubmitting ? 'Submitting...' : 'Submit Quote Request'}
-            </Button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold text-midnight text-[11px] font-semibold uppercase tracking-[0.14em] hover:bg-amber transition-colors disabled:opacity-60"
+            >
+              {isSubmitting ? 'Submitting…' : 'Submit Quote Request'}
+              <IconArrowRight size={16} />
+            </button>
           </form>
         </div>
       </section>

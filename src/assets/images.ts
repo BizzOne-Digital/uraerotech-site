@@ -1,12 +1,40 @@
+/** Cinematic section photography — do not use for page hero bands. */
+export const sectionPhotos = [
+  '/images/sections/section-hangar-sunset.jpg',
+  '/images/sections/section-tarmac-sunset.jpg',
+  '/images/sections/section-structural-open.jpg',
+  '/images/sections/section-hangar-night.jpg',
+  '/images/sections/section-tools-engine.jpg',
+] as const;
+
+/** Top-of-page heroes only (unchanged stock assets). */
+export const pageHero = {
+  about: '/images/about-engineer.jpg',
+  services: '/images/services/aircraft-structural-repair.jpg',
+  industries: '/images/industries/commercial-aviation.jpg',
+  products: '/images/services/aviation-tools-sales.jpg',
+  contact: '/images/cta-hangar.jpg',
+  quote: '/images/hero-hangar.jpg',
+  default: '/images/hero-hangar.jpg',
+};
+
 export const images = {
   hero: '/images/hero-hangar.jpg',
-  about: '/images/about-engineer.jpg',
-  aboutEngineer: '/images/about-engineer.jpg',
-  hangar: '/images/hero-hangar.jpg',
-  fuselage: '/images/services/aircraft-structural-repair.jpg',
-  sheetMetal: '/images/services/aircraft-structural-repair.jpg',
-  tools: '/images/services/aviation-tools-sales.jpg',
-  inspection: '/images/process/01-assessment.jpg',
+  about: sectionPhotos[2],
+  aboutEngineer: sectionPhotos[4],
+  hangar: sectionPhotos[0],
+  fuselage: sectionPhotos[2],
+  sheetMetal: sectionPhotos[2],
+  tools: sectionPhotos[4],
+  inspection: sectionPhotos[0],
+
+  sections: {
+    hangarSunset: sectionPhotos[0],
+    tarmacSunset: sectionPhotos[1],
+    structuralOpen: sectionPhotos[2],
+    hangarNight: sectionPhotos[3],
+    toolsEngine: sectionPhotos[4],
+  },
 
   services: {
     'aircraft-structural-repair': '/images/services/aircraft-structural-repair.jpg',
@@ -27,24 +55,32 @@ export const images = {
   } as Record<string, string>,
 
   process: [
-    '/images/process/01-assessment.jpg',
-    '/images/process/02-engineering.jpg',
-    '/images/process/03-repair.jpg',
-    '/images/process/04-inspection.jpg',
+    sectionPhotos[2],
+    sectionPhotos[4],
+    sectionPhotos[0],
+    sectionPhotos[3],
   ],
 
-  whyChoose: '/images/why-choose-team.jpg',
+  whyChoose: sectionPhotos[1],
   cta: '/images/cta-hangar.jpg',
-  products: '/images/products-feature.jpg',
-  certification: '/images/certification.jpg',
+  products: sectionPhotos[4],
+  certification: sectionPhotos[2],
 
-  fallback: '/images/hero-hangar.jpg',
+  fallback: sectionPhotos[0],
 };
 
+export function getSectionPhoto(index = 0): string {
+  return sectionPhotos[index % sectionPhotos.length];
+}
+
 export function getServiceImage(slug: string, index = 0): string {
-  return images.services[slug] || Object.values(images.services)[index % 6] || images.fallback;
+  if (images.services[slug]) return images.services[slug];
+  const bySlug = `/images/services/${slug}.jpg`;
+  return bySlug || Object.values(images.services)[index % 6] || images.fallback;
 }
 
 export function getIndustryImage(slug: string, index = 0): string {
-  return images.industries[slug] || Object.values(images.industries)[index % 6] || images.fallback;
+  if (images.industries[slug]) return images.industries[slug];
+  const bySlug = `/images/industries/${slug}.jpg`;
+  return bySlug || Object.values(images.industries)[index % 6] || images.fallback;
 }

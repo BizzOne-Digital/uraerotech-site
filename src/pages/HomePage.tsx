@@ -39,7 +39,7 @@ export default function HomePage() {
       <ProcessSection />
       <IndustriesSection industries={industries} />
       <HomeMissionSection mission={settings?.about?.mission} />
-      <CTASection />
+      <CTASection variant="home" />
     </>
   );
 }

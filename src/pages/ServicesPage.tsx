@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
-import Button from '../components/ui/Button';
-import ScrollReveal, { staggerContainer, staggerItem } from '../components/ui/ScrollReveal';
-import { IconArrowRight } from '../components/icons';
-import { getServiceImage } from '../assets/images';
+import PageHero from '../components/ui/PageHero';
+import ScrollReveal from '../components/ui/ScrollReveal';
+import ProcessSection from '../sections/ProcessSection';
+import CTASection from '../sections/CTASection';
+import { IconArrowRight, IconCheck } from '../components/icons';
+import { getHomeServiceImage } from '../assets/homeImages';
+import { pageHero } from '../assets/images';
 import { getServices } from '../services/content';
-import { useReducedMotion } from '../hooks/useReducedMotion';
 import type { Service } from '../types';
 
 export default function ServicesPage() {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
-  const reduced = useReducedMotion();
 
   useEffect(() => {
     getServices().then(setServices).finally(() => setLoading(false));
@@ -23,97 +23,129 @@ export default function ServicesPage() {
     <>
       <SEO title="Services — UR Aerotech" description="Comprehensive aircraft structural repair, modification, and compliance services." />
 
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 bg-graphite overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-60 pointer-events-none" />
-        <div className="absolute top-1/3 -left-32 w-96 h-96 bg-technical/10 rounded-full blur-[120px] pointer-events-none animate-glow-pulse" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-technical/5 rounded-full blur-[100px] pointer-events-none" />
+      <PageHero
+        eyebrow="Our Services"
+        headline="Complete Aviation Solutions for Structural Excellence"
+        subheadline="Structural repair, modification, bulletin compliance, parts supply, and professional tooling — certified precision for every airframe."
+        image={pageHero.services}
+        primaryLabel="Get a Quote"
+        primaryTo="/quote"
+        secondaryLabel="Explore Our Services"
+        secondaryTo="#services-list"
+      />
 
-        <div className="section-padding !pt-8 !pb-0 relative z-10">
-          <div className="container-custom">
-            <motion.div
-              initial={reduced ? false : { opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <p className="eyebrow mb-5">Services</p>
-              <h1 className="heading-xl text-white mb-6">Our Services</h1>
-              <p className="text-lg text-white/70 max-w-2xl leading-relaxed">
-                Comprehensive structural repair services for the global aviation industry — certified, precise, and built for airworthiness.
-              </p>
-            </motion.div>
+      <div id="services-list" className="bg-midnight">
+        {loading ? (
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-10 py-20 space-y-16">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-80 bg-white/[0.03] animate-pulse" />
+            ))}
           </div>
-        </div>
-      </section>
+        ) : (
+          services.map((service, i) => {
+            const imageSrc = getHomeServiceImage(service.slug, i);
+            const reversed = i % 2 === 1;
+            const num = String(i + 1).padStart(2, '0');
 
-      {/* Services grid */}
-      <section className="section-padding bg-graphite relative">
-        <div className="container-custom">
-          {loading ? (
-            <div className="grid md:grid-cols-2 gap-6">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="h-80 bg-surface/50 animate-pulse border border-white/[0.06]" />
-              ))}
-            </div>
-          ) : (
-            <motion.div
-              className="grid md:grid-cols-2 gap-6 lg:gap-8"
-              variants={reduced ? undefined : staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: '-40px' }}
-            >
-              {services.map((service, i) => (
-                <motion.div key={service._id} variants={reduced ? undefined : staggerItem}>
-                  <Link to={`/services/${service.slug}`} className="service-card group block h-full">
-                    <div className="relative aspect-[16/9] overflow-hidden">
-                      <img
-                        src={service.heroImage?.startsWith('/images/') ? service.heroImage : getServiceImage(service.slug, i)}
-                        alt={service.title}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/35 to-transparent" />
-                      <span className="absolute top-4 left-4 w-5 h-5 border-t border-l border-technical/60" />
-                      <span className="absolute top-4 right-4 w-5 h-5 border-t border-r border-technical/60" />
-
-                      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                        <div className="flex items-center gap-3 mb-3">
-                          <span className="font-mono text-[10px] tracking-[0.2em] text-technical">
-                            SVC — {String(i + 1).padStart(2, '0')}
-                          </span>
-                          <span className="h-px flex-1 bg-technical/30" />
-                        </div>
-                        <h2 className="font-heading text-xl md:text-2xl text-white mb-2 group-hover:text-technical transition-colors duration-300">
-                          {service.title}
-                        </h2>
-                        <p className="text-sm text-white/75 leading-relaxed line-clamp-2">{service.tagline}</p>
-                        <span className="inline-flex items-center gap-2 mt-4 font-mono text-[9px] uppercase tracking-[0.18em] text-technical opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                          Explore service
-                          <IconArrowRight size={12} />
+            return (
+              <section
+                key={service._id}
+                className="border-b border-white/[0.06] last:border-b-0"
+              >
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-10 py-16 md:py-24">
+                  <div className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center ${reversed ? '' : ''}`}>
+                    <ScrollReveal className={reversed ? 'lg:order-2' : ''}>
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="inline-flex items-center justify-center w-10 h-10 border border-gold/50 text-gold font-mono text-xs">
+                          {num}
                         </span>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold">{service.title}</span>
                       </div>
-                    </div>
-                  </Link>
-                </motion.div>
+                      <h2 className="font-display text-[clamp(1.5rem,3.5vw,2.25rem)] text-white mb-4 leading-tight">
+                        {service.tagline}
+                      </h2>
+                      <p className="text-white/60 leading-relaxed mb-6">{service.overview}</p>
+                      <ul className="space-y-2 mb-8">
+                        {service.capabilities.slice(0, 5).map((cap) => (
+                          <li key={cap} className="flex items-start gap-2 text-sm text-white/70">
+                            <IconCheck size={16} className="text-gold shrink-0 mt-0.5" />
+                            {cap}
+                          </li>
+                        ))}
+                      </ul>
+                      {service.process?.length > 0 && (
+                        <div className="border border-gold/20 p-5 mb-8 bg-white/[0.02]">
+                          <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold mb-3">Key Specifications</p>
+                          <ul className="space-y-2">
+                            {service.process.slice(0, 4).map((step) => (
+                              <li key={step.step} className="text-xs text-white/55">
+                                <span className="text-gold/80">{String(step.step).padStart(2, '0')}</span> — {step.title}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      <Link
+                        to={`/services/${service.slug}`}
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-midnight text-[11px] font-semibold uppercase tracking-[0.14em] hover:bg-amber transition-colors"
+                      >
+                        Learn About {service.title.split(' ')[0]}
+                        <IconArrowRight size={14} />
+                      </Link>
+                    </ScrollReveal>
+                    <ScrollReveal delay={0.08} className={reversed ? 'lg:order-1' : ''}>
+                      <div className="relative overflow-hidden aspect-[4/3]">
+                        <img src={imageSrc} alt={service.title} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 ring-1 ring-inset ring-gold/20" />
+                      </div>
+                    </ScrollReveal>
+                  </div>
+                </div>
+              </section>
+            );
+          })
+        )}
+      </div>
+
+      <ProcessSection />
+
+      <section className="relative bg-midnight border-y border-white/[0.06] overflow-hidden">
+        <img
+          src="/images/sections/section-tarmac-sunset.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-10"
+          aria-hidden
+        />
+        <div className="relative max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-10 py-16 md:py-24">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <ScrollReveal>
+              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold mb-4">Our Commitment</p>
+              <h2 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] text-white leading-tight">
+                Our Commitment to Quality Assurance
+              </h2>
+              <p className="text-white/60 mt-6 leading-relaxed">
+                Every repair and supply order follows documented quality processes — from intake through final release.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal delay={0.1} className="space-y-6">
+              {[
+                'Certified materials and approved repair data',
+                'NDT and dimensional verification',
+                'Complete traceability and documentation',
+              ].map((line) => (
+                <div key={line} className="flex gap-4 border-l-2 border-gold/40 pl-5">
+                  <p className="text-white/70 text-sm">{line}</p>
+                </div>
               ))}
-            </motion.div>
-          )}
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <ScrollReveal>
-        <section className="section-padding bg-technical relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20 grid-bg pointer-events-none" />
-          <div className="container-custom text-center relative z-10">
-            <h2 className="heading-md text-graphite mb-4">Need a Custom Solution?</h2>
-            <p className="text-graphite/75 mb-8 max-w-xl mx-auto">
-              Contact our team for specialized structural repair and modification services.
-            </p>
-            <Button to="/quote" variant="amber">Request a Quote</Button>
-          </div>
-        </section>
-      </ScrollReveal>
+      <CTASection
+        title="Keep Your Aircraft Mission-Ready"
+        description="Request a quote or speak with our engineering team about your next project."
+      />
     </>
   );
 }

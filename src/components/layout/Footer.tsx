@@ -1,6 +1,16 @@
+import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { IconMail, IconPhone, IconMapPin, IconArrowRight } from '../icons';
+import { IconMail, IconPhone, IconMapPin, IconArrowRight, IconGlobe } from '../icons';
 import Logo from '../ui/Logo';
+
+const quickLinks = [
+  { label: 'Home', to: '/' },
+  { label: 'About Us', to: '/about' },
+  { label: 'Services', to: '/services' },
+  { label: 'Industries', to: '/industries' },
+  { label: 'Tools & Parts', to: '/products' },
+  { label: 'Contact', to: '/contact' },
+];
 
 const serviceLinks = [
   { label: 'Structural Repair', to: '/services/aircraft-structural-repair' },
@@ -10,50 +20,63 @@ const serviceLinks = [
   { label: 'All Services', to: '/services' },
 ];
 
-const companyLinks = [
-  { label: 'About Us', to: '/about' },
-  { label: 'Industries', to: '/industries' },
-  { label: 'Products', to: '/products' },
-  { label: 'Contact', to: '/contact' },
-  { label: 'Request a Quote', to: '/quote' },
+const accountLinks = [{ label: 'Request a Quote', to: '/quote' }];
+
+const socialLinks = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/', short: 'in' },
+  { label: 'YouTube', href: 'https://www.youtube.com/', short: 'yt' },
+  { label: 'Instagram', href: 'https://www.instagram.com/', short: 'ig' },
 ];
+
+function FooterLink({ to, children }: { to: string; children: ReactNode }) {
+  return (
+    <Link
+      to={to}
+      className="text-sm text-white/55 hover:text-gold transition-colors inline-flex items-center gap-2 group"
+    >
+      <span className="w-0 group-hover:w-2 h-px bg-gold transition-all duration-300 shrink-0" />
+      {children}
+    </Link>
+  );
+}
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-midnight overflow-x-clip">
-      {/* subtle grid */}
+    <footer className="relative bg-[#0A0E14] overflow-x-clip text-white">
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(#4A90C2 1px, transparent 1px), linear-gradient(90deg, #4A90C2 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
+            'linear-gradient(rgba(197,160,89,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(197,160,89,0.35) 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
         }}
       />
-
-      {/* top accent */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#4A90C2]/40 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
 
       {/* CTA strip */}
-      <div className="relative border-b border-white/[0.06]">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-10 py-10 md:py-12">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A90C2] mb-3">
-                Ready to start?
-              </p>
-              <h3 className="font-heading text-2xl md:text-3xl text-white leading-tight max-w-lg">
+      <div className="relative border-b border-white/[0.08] bg-gradient-to-r from-[#0A0E14] via-[#0d1219] to-[#0A0E14]">
+        <div className="max-w-[1440px] mx-auto page-x py-12 md:py-14">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
+            <div className="max-w-xl">
+              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-gold mb-3">Ready to start?</p>
+              <h3 className="font-display text-2xl md:text-[1.75rem] lg:text-3xl font-semibold text-white leading-snug">
                 Expert structural repair &amp; certified parts — worldwide
               </h3>
             </div>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 shrink-0 w-full sm:w-auto">
-              <Link to="/quote" className="btn-hero-gold w-full sm:w-auto justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 shrink-0 w-full sm:w-auto">
+              <Link
+                to="/quote"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gold text-[#0A0E14] font-body text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] hover:bg-amber transition-colors w-full sm:w-auto"
+              >
                 Request a Quote
                 <IconArrowRight size={14} />
               </Link>
-              <Link to="/contact" className="btn-hero-ghost w-full sm:w-auto justify-center">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/35 text-white font-body text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.14em] hover:bg-white/5 hover:border-gold/40 transition-colors w-full sm:w-auto"
+              >
                 Contact Us
                 <IconArrowRight size={14} />
               </Link>
@@ -62,124 +85,162 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* main footer */}
-      <div className="relative px-5 sm:px-8 lg:px-10 py-14 md:py-16">
+      {/* Main columns */}
+      <div className="relative page-x py-14 md:py-16">
         <div className="max-w-[1440px] mx-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-10">
             {/* Brand */}
-            <div className="sm:col-span-2 lg:col-span-4">
-              <Logo height="lg" className="mb-6" />
-              <p className="text-sm text-white/50 leading-relaxed max-w-sm mb-8">
-                Aircraft structural repair, modification, and certified parts supply.
-                Serving airlines, MROs, and operators from Gangelt, Germany.
+            <div className="sm:col-span-2 lg:col-span-4 xl:col-span-3">
+              <Logo height="lg" className="mb-5" />
+              <p className="font-body text-sm text-white/55 leading-relaxed max-w-sm mb-6">
+                Aircraft structural repair, modification, and certified parts supply. Serving airlines, MROs, and
+                operators from Gangelt, Germany.
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-7">
                 {['FAA Standards', 'EASA Compliant', '20+ Years'].map((badge) => (
                   <span
                     key={badge}
-                    className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#4A90C2]/80 border border-[#4A90C2]/20 px-3 py-1.5"
+                    className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.12em] text-gold/90 border border-gold/30 bg-gold/[0.06] px-3 py-1.5"
                   >
                     {badge}
                   </span>
                 ))}
               </div>
+              <div className="flex items-center gap-3">
+                {socialLinks.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="w-9 h-9 rounded-full border border-gold/35 flex items-center justify-center font-mono text-[9px] uppercase text-gold/80 hover:bg-gold hover:text-[#0A0E14] hover:border-gold transition-colors"
+                  >
+                    {s.short}
+                  </a>
+                ))}
+              </div>
             </div>
 
-            {/* Services */}
-            <div className="lg:col-span-2 lg:col-start-6">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] mb-6">Services</p>
-              <ul className="space-y-3">
+            <div className="lg:col-span-2">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-gold mb-5 pb-2 border-b border-gold/15 inline-block">
+                Quick Links
+              </p>
+              <ul className="space-y-2.5">
+                {quickLinks.map((link) => (
+                  <li key={link.to}>
+                    <FooterLink to={link.to}>{link.label}</FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="lg:col-span-2">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-gold mb-5 pb-2 border-b border-gold/15 inline-block">
+                Our Services
+              </p>
+              <ul className="space-y-2.5">
                 {serviceLinks.map((link) => (
                   <li key={link.to}>
-                    <Link
-                      to={link.to}
-                      className="text-sm text-white/50 hover:text-white transition-colors inline-flex items-center gap-2 group"
-                    >
-                      <span className="w-0 group-hover:w-2 h-px bg-[#4A90C2] transition-all duration-300" />
-                      {link.label}
-                    </Link>
+                    <FooterLink to={link.to}>{link.label}</FooterLink>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Company */}
             <div className="lg:col-span-2">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] mb-6">Company</p>
-              <ul className="space-y-3">
-                {companyLinks.map((link) => (
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-gold mb-5 pb-2 border-b border-gold/15 inline-block">
+                Account
+              </p>
+              <ul className="space-y-2.5">
+                {accountLinks.map((link) => (
                   <li key={link.to}>
-                    <Link
-                      to={link.to}
-                      className="text-sm text-white/50 hover:text-white transition-colors inline-flex items-center gap-2 group"
-                    >
-                      <span className="w-0 group-hover:w-2 h-px bg-[#4A90C2] transition-all duration-300" />
-                      {link.label}
-                    </Link>
+                    <FooterLink to={link.to}>{link.label}</FooterLink>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Contact */}
-            <div className="lg:col-span-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90C2] mb-6">Contact</p>
-              <ul className="space-y-4">
-                <li>
-                  <a
-                    href="mailto:info@uraerotech.com"
-                    className="flex items-start gap-3 text-sm text-white/50 hover:text-white transition-colors group"
-                  >
-                    <IconMail size={16} className="text-[#4A90C2] shrink-0 mt-0.5" />
-                    info@uraerotech.com
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="tel:+491732504540"
-                    className="flex items-start gap-3 text-sm text-white/50 hover:text-white transition-colors"
-                  >
-                    <IconPhone size={16} className="text-[#4A90C2] shrink-0 mt-0.5" />
-                    +49 173 250 4540
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="tel:+491732498648"
-                    className="flex items-start gap-3 text-sm text-white/50 hover:text-white transition-colors"
-                  >
-                    <IconPhone size={16} className="text-[#4A90C2] shrink-0 mt-0.5" />
-                    +49 173 249 8648
-                  </a>
-                </li>
-                <li className="flex items-start gap-3 text-sm text-white/50">
-                  <IconMapPin size={16} className="text-[#4A90C2] shrink-0 mt-0.5" />
-                  <span>Gaterstr. 66B, 52538 Gangelt, Germany</span>
-                </li>
-              </ul>
+            <div className="sm:col-span-2 lg:col-span-4 xl:col-span-3">
+              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-8 xl:gap-6 justify-between">
+                <div className="flex-1 min-w-0">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-gold mb-5 pb-2 border-b border-gold/15 inline-block">
+                    Contact Us
+                  </p>
+                  <ul className="space-y-3.5">
+                    <li>
+                      <a
+                        href="mailto:info@uraerotech.com"
+                        className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
+                      >
+                        <IconMail size={16} className="text-gold shrink-0 mt-0.5" />
+                        info@uraerotech.com
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="tel:+491732504540"
+                        className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
+                      >
+                        <IconPhone size={16} className="text-gold shrink-0 mt-0.5" />
+                        +49 173 250 4540
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="tel:+491732498648"
+                        className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
+                      >
+                        <IconPhone size={16} className="text-gold shrink-0 mt-0.5" />
+                        +49 173 249 8648
+                      </a>
+                    </li>
+                    <li className="flex items-start gap-3 text-sm text-white/55">
+                      <IconMapPin size={16} className="text-gold shrink-0 mt-0.5" />
+                      <span>Gaterstr. 66B, 52538 Gangelt, Germany</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="flex sm:flex-col items-center justify-center sm:justify-start gap-4 shrink-0 pt-2 lg:pt-8 xl:pt-0">
+                  <div className="w-14 h-14 rounded-full border border-gold/40 flex items-center justify-center text-gold bg-gold/[0.06]">
+                    <IconGlobe size={28} />
+                  </div>
+                  <p className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-gold/80 text-center max-w-[9rem] leading-relaxed">
+                    A Stronger Tomorrow Together
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* bottom bar */}
-      <div className="relative border-t border-white/[0.06]">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-10 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <p className="font-mono text-[10px] text-white/30 tracking-wider">
+      {/* Bottom bar */}
+      <div className="relative border-t border-white/[0.08] bg-[#070a10] pb-[max(1.25rem,env(safe-area-inset-bottom,0px))]">
+        <div className="max-w-[1440px] mx-auto page-x py-5 md:py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 min-w-0">
+          <p className="font-mono text-[10px] text-white/35 tracking-wide">
             © {year} UR Aerotech GmbH. All rights reserved.
           </p>
-          <div className="flex flex-wrap gap-6">
-            <Link to="/contact" className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 hover:text-[#4A90C2] transition-colors">
-              Privacy
-            </Link>
-            <Link to="/contact" className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 hover:text-[#4A90C2] transition-colors">
-              Terms
-            </Link>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {[
+              { label: 'Privacy', to: '/contact' },
+              { label: 'Terms', to: '/contact' },
+              { label: 'Sitemap', to: '/contact' },
+            ].map((item) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/35 hover:text-gold transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
             <a
               href="https://uraerotech.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 hover:text-[#4A90C2] transition-colors"
+              className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/35 hover:text-gold transition-colors"
             >
               uraerotech.com
             </a>

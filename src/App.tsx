@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './hooks/useAuth';
 import { useLenis } from './hooks/useLenis';
@@ -16,8 +16,6 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import QuotePage from './pages/QuotePage';
 import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import DashboardPage from './pages/DashboardPage';
 import AdminLayout from './admin/AdminLayout';
 
 function AppRoutes() {
@@ -36,8 +34,8 @@ function AppRoutes() {
         <Route path="contact" element={<ContactPage />} />
         <Route path="quote" element={<QuotePage />} />
         <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+        <Route path="register" element={<Navigate to="/" replace />} />
+        <Route path="dashboard" element={<Navigate to="/" replace />} />
       </Route>
       <Route path="admin/*" element={<ProtectedRoute adminOnly><AdminLayout /></ProtectedRoute>} />
     </Routes>
