@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { IconMail, IconPhone, IconMapPin, IconArrowRight, IconGlobe } from '../icons';
+import { IconMail, IconPhone, IconMapPin, IconArrowRight } from '../icons';
 import Logo from '../ui/Logo';
 import { SITE_CONTACT } from '../../constants/siteContact';
 
@@ -85,7 +85,7 @@ export default function Footer() {
         <div className="max-w-[1440px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-10">
             {/* Brand */}
-            <div className="sm:col-span-2 lg:col-span-4 xl:col-span-3">
+            <div className="sm:col-span-2 lg:col-span-3">
               <Logo height="xl" className="mb-5" />
               <p className="font-body text-sm text-white/55 leading-relaxed max-w-sm mb-6">
                 Aircraft structural repair, modification, and certified parts supply. Serving airlines, MROs, and
@@ -142,56 +142,56 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div className="sm:col-span-2 lg:col-span-4 xl:col-span-3">
-              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-8 xl:gap-6 justify-between">
-                <div className="flex-1 min-w-0">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-gold mb-5 pb-2 border-b border-gold/15 inline-block">
-                    Contact Us
-                  </p>
-                  <ul className="space-y-3.5">
-                    <li>
-                      <a
-                        href={`mailto:${SITE_CONTACT.email}`}
-                        className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
-                      >
-                        <IconMail size={16} className="text-gold shrink-0 mt-0.5" />
-                        {SITE_CONTACT.email}
-                      </a>
-                    </li>
-                    {SITE_CONTACT.phones.map((phone) => (
-                      <li key={phone.tel}>
-                        <a
-                          href={`tel:${phone.tel}`}
-                          className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
-                        >
-                          <IconPhone size={16} className="text-gold shrink-0 mt-0.5" />
-                          {phone.display}
-                        </a>
-                      </li>
-                    ))}
-                    <li>
-                      <a
-                        href={SITE_CONTACT.mapUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-start gap-3 text-sm text-white/55 hover:text-gold transition-colors"
-                      >
-                        <IconMapPin size={16} className="text-gold shrink-0 mt-0.5" />
-                        <span>{SITE_CONTACT.address}</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="flex sm:flex-col items-center justify-center sm:justify-start gap-4 shrink-0 pt-2 lg:pt-8 xl:pt-0">
-                  <div className="w-14 h-14 rounded-full border border-gold/40 flex items-center justify-center text-gold bg-gold/[0.06]">
-                    <IconGlobe size={28} />
-                  </div>
-                  <p className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-gold/80 text-center max-w-[9rem] leading-relaxed">
-                    A Stronger Tomorrow Together
-                  </p>
-                </div>
-              </div>
+            <div className="sm:col-span-2 lg:col-span-3">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-gold mb-5 pb-2 border-b border-gold/15">
+                Contact Us
+              </p>
+              <ul className="space-y-4">
+                <li>
+                  <a
+                    href={`mailto:${SITE_CONTACT.email}`}
+                    className="flex items-start gap-3 text-sm text-white/60 hover:text-gold transition-colors group"
+                  >
+                    <span className="w-8 h-8 shrink-0 flex items-center justify-center rounded-full border border-gold/30 bg-gold/[0.06] text-gold group-hover:border-gold/50">
+                      <IconMail size={15} />
+                    </span>
+                    <span className="pt-1 break-all">{SITE_CONTACT.email}</span>
+                  </a>
+                </li>
+                {SITE_CONTACT.phones.map((phone) => (
+                  <li key={phone.tel}>
+                    <a
+                      href={`tel:${phone.tel}`}
+                      className="flex items-start gap-3 text-sm text-white/60 hover:text-gold transition-colors group"
+                    >
+                      <span className="w-8 h-8 shrink-0 flex items-center justify-center rounded-full border border-gold/30 bg-gold/[0.06] text-gold group-hover:border-gold/50">
+                        <IconPhone size={15} />
+                      </span>
+                      <span className="pt-1">{phone.display}</span>
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a
+                    href={SITE_CONTACT.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 text-sm text-white/60 hover:text-gold transition-colors group"
+                  >
+                    <span className="w-8 h-8 shrink-0 flex items-center justify-center rounded-full border border-gold/30 bg-gold/[0.06] text-gold group-hover:border-gold/50 mt-0.5">
+                      <IconMapPin size={15} />
+                    </span>
+                    <span className="leading-relaxed max-w-[16rem]">
+                      Gaterstr. 66B
+                      <br />
+                      52538 Gangelt, Germany
+                    </span>
+                  </a>
+                </li>
+              </ul>
+              <p className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-gold/70 mt-6 pt-5 border-t border-white/[0.06] leading-relaxed">
+                A Stronger Tomorrow Together
+              </p>
             </div>
           </div>
         </div>
