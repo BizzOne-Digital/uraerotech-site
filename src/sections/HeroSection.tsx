@@ -47,7 +47,7 @@ export default function HeroSection({ data, statistics }: HeroProps) {
     <section className="relative min-h-screen-safe min-h-[100svh] flex flex-col justify-end overflow-hidden bg-[#0A0E14]">
       <div className="absolute inset-0">
         <video
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-center brightness-[1.06] contrast-[1.02]"
           autoPlay
           muted
           loop
@@ -57,9 +57,9 @@ export default function HeroSection({ data, statistics }: HeroProps) {
         >
           <source src={HERO_VIDEO} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-[#0A0E14]/55" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E14] via-[#0A0E14]/45 to-[#0A0E14]/25" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0E14]/70 via-transparent to-transparent" />
+        {/* Light bottom fade so headline stays readable without dimming the whole video */}
+        <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[#0A0E14]/80 via-[#0A0E14]/25 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#0A0E14]/35 to-transparent pointer-events-none" />
       </div>
 
       <div

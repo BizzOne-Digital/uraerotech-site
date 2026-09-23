@@ -51,7 +51,7 @@ export default function Header() {
           scrolled
             ? 'bg-graphite/95 backdrop-blur-md border-b border-white/[0.08]'
             : isHome
-              ? 'bg-gradient-to-b from-graphite/75 to-transparent'
+              ? 'bg-gradient-to-b from-graphite/40 to-transparent'
               : 'bg-graphite/90 backdrop-blur-md'
         }`}
       >
