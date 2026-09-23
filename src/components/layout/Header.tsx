@@ -56,7 +56,7 @@ export default function Header() {
         }`}
       >
         <div className="max-w-[1440px] mx-auto page-x flex items-center justify-between gap-2 sm:gap-6 min-w-0">
-          <div className="min-w-0 shrink max-w-[62%] xs:max-w-none sm:max-w-none">
+          <div className="min-w-0 shrink max-w-[68%] xs:max-w-none sm:max-w-none">
             <Logo height="lg" />
           </div>
 

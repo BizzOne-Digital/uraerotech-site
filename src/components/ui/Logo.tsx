@@ -8,9 +8,9 @@ interface LogoProps {
 }
 
 const heights = {
-  sm: 'h-9 sm:h-10',
-  md: 'h-11 sm:h-12 md:h-14 max-w-[min(100%,14rem)] sm:max-w-[16rem] md:max-w-[18rem]',
-  lg: 'h-12 sm:h-14 md:h-16 max-w-[min(100%,16rem)] sm:max-w-[18rem] md:max-w-[20rem]',
+  sm: 'h-10 sm:h-11',
+  md: 'h-12 sm:h-14 md:h-16 max-w-[min(100%,16rem)] sm:max-w-[18rem] md:max-w-[20rem]',
+  lg: 'h-16 sm:h-[4.5rem] md:h-20 max-w-[min(100%,20rem)] sm:max-w-[22rem] md:max-w-[26rem]',
 };
 
 export default function Logo({ className = '', height = 'md' }: LogoProps) {

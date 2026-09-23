@@ -40,7 +40,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               <img
                 src={LOGO_SRC}
                 alt="UR Aerotech"
-                className="h-10 sm:h-11 md:h-14 w-auto object-contain"
+                className="h-14 sm:h-16 md:h-20 w-auto max-w-[min(100%,20rem)] object-contain"
               />
             </div>
             <motion.div className="w-32 h-px bg-white/10 mt-6 mx-auto overflow-hidden">
