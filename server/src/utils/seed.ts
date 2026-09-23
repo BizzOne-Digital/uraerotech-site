@@ -250,9 +250,9 @@ const seed = async () => {
       },
       statistics: [
         { label: 'Years of Experience', value: '20', suffix: '+' },
-        { label: 'Projects Completed', value: '5000', suffix: '+' },
-        { label: 'Satisfied Clients', value: '1000', suffix: '+' },
         { label: 'Parts in Inventory', value: '50', suffix: 'K+' },
+        { label: 'On-Time Delivery', value: '99.8', suffix: '%' },
+        { label: 'AOG Support', value: '24', suffix: '/7' },
       ],
       certifications: [
         { title: 'FAA Standards Compliance', description: 'All repairs performed to FAA and international aviation standards.' },

@@ -128,8 +128,8 @@ export default function IndustriesPage() {
           </ScrollReveal>
           <ScrollReveal delay={0.1} className="grid grid-cols-2 gap-6">
             <div>
-              <p className="font-display text-3xl text-white">1,000+</p>
-              <p className="text-xs text-white/50 mt-1">Clients supported</p>
+              <p className="font-display text-3xl text-white">20+</p>
+              <p className="text-xs text-white/50 mt-1">Years of experience</p>
             </div>
             <div>
               <p className="font-display text-3xl text-white">50+</p>

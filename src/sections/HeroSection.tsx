@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { IconShield, IconGlobe, IconBox, IconClock, IconArrowRight } from '../components/icons';
 import { homeImages } from '../assets/homeImages';
+import { resolveSiteStatistics, type SiteStatistic } from '../utils/siteStatistics';
 
 const HERO_VIDEO = encodeURI('/Aviation Video.mp4');
 
@@ -26,22 +27,20 @@ interface HeroProps {
   statistics?: { label: string; value: string; suffix?: string }[];
 }
 
-const defaultStats = [
-  { value: '25+', label: 'Years of Excellence' },
-  { value: '1,200+', label: 'Clients Worldwide' },
-  { value: '50,000+', label: 'Parts in Stock' },
-  { value: '99.8%', label: 'On-Time Delivery' },
-];
+function formatHeroStatValue(s: SiteStatistic): string {
+  if (s.suffix === '/7') return `${s.value}${s.suffix}`;
+  if (s.label.toLowerCase().includes('parts') && s.value === '50000') return '50,000+';
+  if (s.label.toLowerCase().includes('parts') && s.value === '50' && s.suffix === 'K+') return '50K+';
+  return `${s.value}${s.suffix ?? ''}`;
+}
 
 export default function HeroSection({ data, statistics }: HeroProps) {
   const hero = { ...defaultHero, ...data };
   const poster = hero.image && !hero.image.includes('unsplash') ? hero.image : homeImages.hero;
-  const stats = statistics?.length
-    ? statistics.slice(0, 4).map((s) => ({
-        value: `${s.value}${s.suffix ?? ''}`,
-        label: s.label,
-      }))
-    : defaultStats;
+  const stats = resolveSiteStatistics(statistics, 4).map((s) => ({
+    value: formatHeroStatValue(s),
+    label: s.label,
+  }));
 
   return (
     <section className="relative min-h-screen-safe min-h-[100svh] flex flex-col justify-end overflow-hidden bg-[#0A0E14]">

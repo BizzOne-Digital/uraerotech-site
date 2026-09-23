@@ -165,7 +165,7 @@ export default function ContactPage() {
           </ScrollReveal>
           <div className="grid sm:grid-cols-3 gap-8 text-center">
             {[
-              { value: '1,000+', label: 'Clients Worldwide', icon: IconGlobe },
+              { value: '20+', label: 'Years of Excellence', icon: IconShield },
               { value: '50+', label: 'Countries Served', icon: IconMapPin },
               { value: '24/7', label: 'Global Support', icon: IconPhone },
             ].map((s) => (

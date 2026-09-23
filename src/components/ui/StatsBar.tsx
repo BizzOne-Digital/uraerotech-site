@@ -4,9 +4,9 @@ export type StatItem = { value: string; label: string };
 
 export const defaultPageStats: StatItem[] = [
   { value: '20+', label: 'Years of Excellence' },
-  { value: '1,000+', label: 'Clients Worldwide' },
   { value: '50,000+', label: 'Parts in Stock' },
   { value: '99.8%', label: 'On-Time Delivery' },
+  { value: '24/7', label: 'AOG Support' },
 ];
 
 const statIcons = [IconShield, IconGlobe, IconBox, IconClock];

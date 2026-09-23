@@ -1,10 +1,11 @@
 import { useCounter } from '../animations/scrollAnimations';
+import { filterSiteStatistics } from '../utils/siteStatistics';
 
 const defaultStats = [
   { label: 'Years of Experience', value: '20', suffix: '+', numeric: 20 },
-  { label: 'Projects Completed', value: '5000', suffix: '+', numeric: 5000 },
-  { label: 'Satisfied Clients', value: '1000', suffix: '+', numeric: 1000 },
   { label: 'Parts in Inventory', value: '50', suffix: 'K+', numeric: 50 },
+  { label: 'On-Time Delivery', value: '99.8', suffix: '%', numeric: 99.8 },
+  { label: 'AOG Support', value: '24', suffix: '/7', numeric: 24 },
 ];
 
 export default function Statistics({
@@ -13,15 +14,20 @@ export default function Statistics({
   statistics?: { label: string; value: string; suffix?: string }[];
 }) {
   const stats = statistics
-    ? statistics.map((s) => ({ ...s, suffix: s.suffix ?? '', numeric: parseInt(s.value) || 0 }))
+    ? filterSiteStatistics(statistics).map((s) => ({
+        ...s,
+        suffix: s.suffix ?? '',
+        numeric: parseFloat(s.value) || 0,
+      }))
     : defaultStats;
+  const displayStats = stats.length ? stats : defaultStats;
 
   return (
     <section className="section-muted border-y border-white/[0.06]">
       <div className="section-pad !py-16 md:!py-20">
         <div className="site-container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-            {stats.map((stat) => (
+            {displayStats.map((stat) => (
               <StatItem key={stat.label} stat={stat} />
             ))}
           </div>
